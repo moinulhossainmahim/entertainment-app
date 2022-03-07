@@ -6,7 +6,7 @@ export const Navbar = () => {
   const classes = useStyles();
   return (
     <>
-      <AppBar position='static' className={classes.appBar}>
+      <AppBar position='sticky' className={classes.appBar}>
         <span>
           <Theaters className={classes.navIcon} />
         </span>
