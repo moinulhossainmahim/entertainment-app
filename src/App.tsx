@@ -1,12 +1,13 @@
 import SimpleBottomNavigation from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
-import Movies from "./components/Movies/Movies";
+import SearchMovie from "./components/Search/Search";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Movies />
+      {/* <Movies /> */}
+      <SearchMovie />
       <SimpleBottomNavigation />
     </>
   );

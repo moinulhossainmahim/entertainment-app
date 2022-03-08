@@ -7,6 +7,7 @@ import {
   CardContent,
   Typography,
   Badge,
+  Box,
 } from "@material-ui/core";
 import useStyles from "./styles";
 
@@ -16,6 +17,14 @@ const Movies = () => {
   return (
     <>
       <Container maxWidth={false} className={classes.moviesContainer}>
+        <Typography
+          align='center'
+          variant='h4'
+          gutterBottom
+          style={{ color: "white", textTransform: "uppercase" }}
+        >
+          Treding Today
+        </Typography>
         <Grid container justifyContent='center' spacing={4}>
           {cards.map((card) => (
             <Grid
@@ -34,8 +43,17 @@ const Movies = () => {
                   className={classes.cardMedia}
                 />
                 <CardContent>
-                  <Typography variant='h5'>Heading</Typography>
-                  <Typography>This looks awesome!</Typography>
+                  <Typography variant='h5' align='center' gutterBottom>
+                    The Batman
+                  </Typography>
+                  <Box className={classes.movieInfo}>
+                    <Typography variant='body1' paragraph>
+                      Movie
+                    </Typography>
+                    <Typography variant='body1' paragraph>
+                      2021-12-15
+                    </Typography>
+                  </Box>
                 </CardContent>
               </Card>
             </Grid>
