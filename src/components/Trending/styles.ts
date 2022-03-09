@@ -1,11 +1,6 @@
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core";
 
 export default makeStyles((theme) => ({
-  searchBox: {
-    display: "flex",
-    justifyContent: "center",
-    margin: "15px 0",
-  },
   card: {
     height: "100%",
     display: "flex",
@@ -23,17 +18,10 @@ export default makeStyles((theme) => ({
   },
   moviesContainer: {
     backgroundColor: "#39445A",
-    padding: "5%",
+    padding: "3%",
   },
   movieInfo: {
     display: "flex",
     justifyContent: "space-between",
-  },
-  form: {
-    width: "60vh",
-    display: "flex",
-  },
-  searchWrapper: {
-    padding: "0 0 5rem 0",
   },
 }));

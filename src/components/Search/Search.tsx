@@ -33,30 +33,32 @@ const SearchMovie = () => {
   const cards = [1, 2, 3, 4, 5, 6];
   return (
     <Container maxWidth={false} className={classes.moviesContainer}>
-      <ThemeProvider theme={darkTheme}>
-        <div className={classes.searchBox}>
-          <form className={classes.form}>
-            <TextField variant='outlined' label='Search' fullWidth />
-            <Button variant='contained' type='submit'>
-              <Search fontSize='large' />
-            </Button>
-          </form>
-        </div>
-        <Tabs
-          value={type}
-          indicatorColor='primary'
-          textColor='primary'
-          onChange={(event, newValue) => {
-            setType(newValue);
-            setPage(1);
-          }}
-          style={{ paddingBottom: 5 }}
-          aria-label='disabled tabs example'
-        >
-          <Tab style={{ width: "50%" }} label='Search Movies' />
-          <Tab style={{ width: "50%" }} label='Search TV Series' />
-        </Tabs>
-      </ThemeProvider>
+      <div className={classes.searchWrapper}>
+        <ThemeProvider theme={darkTheme}>
+          <div className={classes.searchBox}>
+            <form className={classes.form}>
+              <TextField variant='outlined' label='Search' fullWidth />
+              <Button variant='contained' type='submit'>
+                <Search fontSize='large' />
+              </Button>
+            </form>
+          </div>
+          <Tabs
+            value={type}
+            indicatorColor='primary'
+            textColor='primary'
+            onChange={(event, newValue) => {
+              setType(newValue);
+              setPage(1);
+            }}
+            style={{ paddingBottom: 5 }}
+            aria-label='disabled tabs example'
+          >
+            <Tab style={{ width: "50%" }} label='Search Movies' />
+            <Tab style={{ width: "50%" }} label='Search TV Series' />
+          </Tabs>
+        </ThemeProvider>
+      </div>
       <Grid container justifyContent='center' spacing={4}>
         {cards.map((card) => (
           <Grid

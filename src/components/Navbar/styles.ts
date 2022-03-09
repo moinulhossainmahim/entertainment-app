@@ -13,9 +13,6 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     boxShadow: "0px 2px 4px #292323",
   },
-  header: {
-    fontSize: "2rem",
-  },
   navIcon: {
     fontSize: "3rem",
     cursor: "pointer",

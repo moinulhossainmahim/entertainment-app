@@ -3,7 +3,7 @@ import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import { Tv, Whatshot, Movie, Search } from "@material-ui/icons";
 import useStyles from "./styles";
 
-export default function SimpleBottomNavigation() {
+export default function Footer() {
   const [value, setValue] = React.useState(0);
   const classes = useStyles();
 

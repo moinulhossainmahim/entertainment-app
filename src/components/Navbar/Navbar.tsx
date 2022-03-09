@@ -1,4 +1,4 @@
-import { AppBar, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, CssBaseline } from "@material-ui/core";
 import { Theaters } from "@material-ui/icons";
 import useStyles from "./styles";
 
@@ -6,13 +6,12 @@ export const Navbar = () => {
   const classes = useStyles();
   return (
     <>
+      <CssBaseline />
       <AppBar position='sticky' className={classes.appBar}>
-        <span>
+        <Toolbar>
           <Theaters className={classes.navIcon} />
-        </span>
-        <Typography variant='h6' className={classes.header}>
-          Entertainment Hub
-        </Typography>
+        </Toolbar>
+        <Typography variant='h4'>Entertainment Hub</Typography>
       </AppBar>
     </>
   );
