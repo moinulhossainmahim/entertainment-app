@@ -1,7 +1,7 @@
-import { Movie, Action, ActionType } from "../actionTypes";
+import { MovieType, Action, ActionType } from "../actionTypes";
 
 interface State {
-  movieList: Movie[];
+  movieList: MovieType[];
   isLoading: boolean;
   error: string | null;
 }
@@ -13,7 +13,16 @@ const initialState = {
 };
 
 const trendingReducer = (state: State = initialState, action: Action) => {
-  return state;
+  switch (action.type) {
+    case ActionType.LOADING:
+      return { ...state, isLoading: true };
+    case ActionType.END_LOADING:
+      return { ...state, isLoading: false };
+    case ActionType.FETCH_MOVIES:
+      return { ...state, movieList: action.payload };
+    default:
+      return state;
+  }
 };
 
 export default trendingReducer;

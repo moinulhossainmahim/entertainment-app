@@ -1,10 +1,25 @@
 import { Container, Grid, Typography } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 import useStyles from "./styles";
+import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Movie from "./Movie/Movie";
+import { LoadingSpinner } from "../../Loading/Loading";
+import { useEffect } from "react";
+import { fetchTrending } from "../../actions/movies";
 
 const Movies = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const { isLoading, movieList } = useTypedSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(fetchTrending());
+  }, []);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <>
       <Container maxWidth={false} className={classes.moviesContainer}>
@@ -17,9 +32,9 @@ const Movies = () => {
           Discover Movies
         </Typography>
         <Grid container justifyContent='center' spacing={4}>
-          {cards.map((card) => (
+          {movieList.map((movie) => (
             <Grid
-              key={card}
+              key={movie.id}
               item
               xs={12}
               md={4}
@@ -27,7 +42,7 @@ const Movies = () => {
               sm={6}
               className={classes.mainCard}
             >
-              <Movie />
+              <Movie movie={movie} />
             </Grid>
           ))}
         </Grid>

@@ -1,4 +1,4 @@
-export interface Movie {
+export interface MovieType {
   poster_path: string;
   vote_count: number;
   overview: string;
@@ -20,15 +20,19 @@ export enum ActionType {
   LOADING = "LOADING",
   FETCH_MOVIES = "FETCH_MOVIES",
   ERROR = "ERROR",
+  END_LOADING = "END_LOADING",
 }
 
 interface loading {
   type: ActionType.LOADING;
 }
 
+interface endLoading {
+  type: ActionType.END_LOADING;
+}
 interface fetchMovies {
   type: ActionType.FETCH_MOVIES;
-  payload: Movie[];
+  payload: MovieType[];
 }
 
 interface failFetching {
@@ -36,4 +40,4 @@ interface failFetching {
   payload: string;
 }
 
-export type Action = loading | fetchMovies | failFetching;
+export type Action = loading | fetchMovies | failFetching | endLoading;

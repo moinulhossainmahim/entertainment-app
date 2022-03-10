@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { capitalize, makeStyles } from "@material-ui/core";
 
 export default makeStyles((theme) => ({
   card: {
@@ -16,5 +16,11 @@ export default makeStyles((theme) => ({
   movieInfo: {
     display: "flex",
     justifyContent: "space-between",
+  },
+  movieTitle: {
+    textTransform: "capitalize",
+  },
+  mediaType: {
+    textTransform: "capitalize",
   },
 }));

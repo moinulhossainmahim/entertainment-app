@@ -27,7 +27,7 @@ const Trending = () => {
               sm={6}
               className={classes.mainCard}
             >
-              <Movie />
+              {/* <Movie /> */}
             </Grid>
           ))}
         </Grid>

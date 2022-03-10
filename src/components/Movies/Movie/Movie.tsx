@@ -7,27 +7,37 @@ import {
   Box,
 } from "@material-ui/core";
 import useStyles from "./styles";
+import { MovieType } from "../../../actionTypes";
 
-const Movie = () => {
+type movie = {
+  movie: MovieType;
+};
+
+const Movie = ({ movie }: movie) => {
   const classes = useStyles();
   return (
     <>
-      <Badge badgeContent={1} color='primary' />
+      <Badge badgeContent={movie.vote_average} color='primary' />
       <Card className={classes.card}>
         <CardMedia
-          image='https://source.unsplash.com/random'
+          image={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
           className={classes.cardMedia}
         />
         <CardContent>
-          <Typography variant='h5' align='center' gutterBottom>
-            The Batman
+          <Typography
+            variant='h5'
+            align='center'
+            gutterBottom
+            className={classes.movieTitle}
+          >
+            {movie.title}
           </Typography>
           <Box className={classes.movieInfo}>
-            <Typography variant='body1' paragraph>
-              Movie
+            <Typography variant='body1' paragraph className={classes.mediaType}>
+              {movie.media_type}
             </Typography>
             <Typography variant='body1' paragraph>
-              2021-12-15
+              {movie.release_date}
             </Typography>
           </Box>
         </CardContent>
