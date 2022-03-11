@@ -6,17 +6,20 @@ import {
   Typography,
   Box,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import useStyles from "./styles";
 import { MovieType } from "../../../actionTypes";
 
 type movie = {
   movie: MovieType;
+  media_type: string;
 };
 
-const Movie = ({ movie }: movie) => {
+const Movie = ({ movie, media_type }: movie) => {
   const classes = useStyles();
+
   return (
-    <>
+    <Link to={`/${media_type}/${movie.id}`} className={classes.singleMovieLink}>
       <Badge badgeContent={movie.vote_average} color='primary' />
       <Card className={classes.card}>
         <CardMedia
@@ -30,19 +33,19 @@ const Movie = ({ movie }: movie) => {
             gutterBottom
             className={classes.movieTitle}
           >
-            {movie.title}
+            {movie.title || movie.original_title || movie.original_name}
           </Typography>
           <Box className={classes.movieInfo}>
             <Typography variant='body1' paragraph className={classes.mediaType}>
-              {movie.media_type}
+              {movie.media_type === "tv" ? "Tv Series" : movie.media_type}
             </Typography>
             <Typography variant='body1' paragraph>
-              {movie.release_date}
+              {movie.release_date || movie.first_air_date}
             </Typography>
           </Box>
         </CardContent>
       </Card>
-    </>
+    </Link>
   );
 };
 

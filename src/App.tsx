@@ -1,14 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
-import {
-  Home,
-  SearchPage,
-  TvSeriesPage,
-  SinglePage,
-  MoviesPage,
-  ErrorPage,
-} from "./components/Pages";
+import { SinglePage, MoviesPage, ErrorPage } from "./components/Pages";
 
 function App() {
   return (
@@ -18,7 +11,7 @@ function App() {
         {/* <Route path='/' element={<Home />} /> */}
         <Route path='/movies' element={<MoviesPage />} />
         {/* <Route path='/tvseries' element={<TvSeriesPage />} /> */}
-        {/* <Route path='/movies/:id' element={<SinglePage />} /> */}
+        <Route path='/:media_type/:id' element={<SinglePage />} />
         {/* <Route path='/search' element={<SearchPage />} /> */}
         <Route path='*' element={<ErrorPage />} />
       </Routes>

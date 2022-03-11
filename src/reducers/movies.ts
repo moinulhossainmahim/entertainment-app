@@ -1,18 +1,19 @@
-import { MovieType, Action, ActionType } from "../actionTypes";
-
+import { Action, ActionType, MovieType } from "../actionTypes";
 interface State {
   movieList: MovieType[];
   isLoading: boolean;
   error: string | null;
+  singleMovie: MovieType | null;
 }
 
 const initialState = {
-  isLoading: false,
   movieList: [],
+  isLoading: true,
   error: null,
+  singleMovie: null,
 };
 
-const trendingReducer = (state: State = initialState, action: Action) => {
+const movieReducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.LOADING:
       return { ...state, isLoading: true };
@@ -20,11 +21,11 @@ const trendingReducer = (state: State = initialState, action: Action) => {
       return { ...state, isLoading: false };
     case ActionType.FETCH_MOVIES:
       return { ...state, movieList: action.payload };
+    case ActionType.FETCH_SINGLE_MOVIE:
+      return { ...state, singleMovie: action.payload };
     default:
       return state;
   }
 };
 
-export default trendingReducer;
-
-export type RootState = ReturnType<typeof trendingReducer>;
+export default movieReducer;

@@ -3,7 +3,13 @@ import { CircularProgress, Box } from "@material-ui/core";
 
 export const LoadingSpinner = () => {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <CircularProgress />
     </Box>
   );

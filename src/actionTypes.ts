@@ -1,19 +1,15 @@
 export interface MovieType {
   poster_path: string;
-  vote_count: number;
-  overview: string;
   release_date: string;
-  video: boolean;
   vote_average: number;
-  adult: boolean;
-  backdrop_path: string;
   title: string;
-  genre_ids: number[];
   id: number;
-  original_language: string;
   original_title: string;
-  popularity: number;
   media_type: string;
+  original_name: string;
+  first_air_date: string;
+  overview: string;
+  tagline: string;
 }
 
 export enum ActionType {
@@ -21,6 +17,7 @@ export enum ActionType {
   FETCH_MOVIES = "FETCH_MOVIES",
   ERROR = "ERROR",
   END_LOADING = "END_LOADING",
+  FETCH_SINGLE_MOVIE = "FETCH_SINGLE_MOVIE",
 }
 
 interface loading {
@@ -40,4 +37,14 @@ interface failFetching {
   payload: string;
 }
 
-export type Action = loading | fetchMovies | failFetching | endLoading;
+interface fetchSingleMovie {
+  type: ActionType.FETCH_SINGLE_MOVIE;
+  payload: MovieType;
+}
+
+export type Action =
+  | loading
+  | fetchMovies
+  | failFetching
+  | endLoading
+  | fetchSingleMovie;

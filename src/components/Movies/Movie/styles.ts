@@ -23,4 +23,7 @@ export default makeStyles((theme) => ({
   mediaType: {
     textTransform: "capitalize",
   },
+  singleMovieLink: {
+    textDecoration: "none",
+  },
 }));
