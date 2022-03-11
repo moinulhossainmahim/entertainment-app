@@ -7,6 +7,7 @@ import {
   ErrorPage,
   Home,
   TvSeriesPage,
+  SearchPage,
 } from "./components/Pages";
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         <Route path='/movies' element={<MoviesPage />} />
         <Route path='/tvseries' element={<TvSeriesPage />} />
         <Route path='/:media_type/:id' element={<SinglePage />} />
-        {/* <Route path='/search' element={<SearchPage />} /> */}
+        <Route path='/search' element={<SearchPage />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
       <Footer />
