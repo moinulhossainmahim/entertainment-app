@@ -49,3 +49,19 @@ export const fetchTrending = () => async (dispatch: Dispatch<Action>) => {
     dispatch({ type: ActionType.END_LOADING });
   }
 };
+
+export const fetchTvSeries = () => async (dispatch: Dispatch<Action>) => {
+  dispatch({ type: ActionType.LOADING });
+  try {
+    const {
+      data: { results: tvSeries },
+    } = await axios.get(
+      "https://api.themoviedb.org/3/discover/tv?api_key=f41ca7cfda77d7a7d04c7c1e517633b9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false"
+    );
+    dispatch({ type: ActionType.FETCH_TVSERIES, payload: tvSeries });
+    dispatch({ type: ActionType.END_LOADING });
+  } catch (error: any) {
+    dispatch({ type: ActionType.ERROR, payload: error.message });
+    dispatch({ type: ActionType.END_LOADING });
+  }
+};

@@ -38,7 +38,9 @@ const SingleMovies = () => {
           </Grid>
           <Grid item xs={12} sm={6} className={classes.movieDetails}>
             <Typography variant='h3' gutterBottom>
-              {singleMovie?.title}
+              {singleMovie?.title ||
+                singleMovie?.original_name ||
+                singleMovie?.original_title}
             </Typography>
             <Typography variant='h6' gutterBottom>
               {singleMovie?.tagline}

@@ -19,13 +19,17 @@ export enum ActionType {
   END_LOADING = "END_LOADING",
   FETCH_SINGLE_MOVIE = "FETCH_SINGLE_MOVIE",
   FETCH_TRENDING = "FETCH_TRENDING",
+  FETCH_TVSERIES = "FETCH_TVSERIES",
 }
 
 interface loading {
   type: ActionType.LOADING | ActionType.END_LOADING;
 }
 interface fetchMovies {
-  type: ActionType.FETCH_MOVIES | ActionType.FETCH_TRENDING;
+  type:
+    | ActionType.FETCH_MOVIES
+    | ActionType.FETCH_TRENDING
+    | ActionType.FETCH_TVSERIES;
   payload: MovieType[];
 }
 

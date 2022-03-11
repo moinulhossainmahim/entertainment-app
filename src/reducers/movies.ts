@@ -25,6 +25,8 @@ const movieReducer = (state: State = initialState, action: Action) => {
       return { ...state, singleMovie: action.payload };
     case ActionType.FETCH_TRENDING:
       return { ...state, movieList: action.payload };
+    case ActionType.FETCH_TVSERIES:
+      return { ...state, movieList: action.payload };
     default:
       return state;
   }

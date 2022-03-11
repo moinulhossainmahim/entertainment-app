@@ -1,10 +1,29 @@
+import { useEffect } from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
-import Movie from "../Movies/Movie/Movie";
 import useStyles from "./styles";
+import Movie from "../Movies/Movie/Movie";
+import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../utilities/useTypeSelector";
+import { LoadingSpinner } from "../../Loading/Loading";
+import { fetchTvSeries } from "../../actions/movies";
 
 const TvSeries = () => {
+  const dispatch = useDispatch();
+  const { isLoading, movieList } = useTypedSelector((state) => state.movies);
   const classes = useStyles();
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  useEffect(() => {
+    dispatch(fetchTvSeries());
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Container maxWidth='md' className={classes.moviesContainer}>
+        <LoadingSpinner />
+      </Container>
+    );
+  }
+
   return (
     <>
       <Container maxWidth={false} className={classes.moviesContainer}>
@@ -17,9 +36,9 @@ const TvSeries = () => {
           Discover Series
         </Typography>
         <Grid container justifyContent='center' spacing={4}>
-          {cards.map((card) => (
+          {movieList.map((movie) => (
             <Grid
-              key={card}
+              key={movie.id}
               item
               xs={12}
               md={4}
@@ -27,7 +46,7 @@ const TvSeries = () => {
               sm={6}
               className={classes.mainCard}
             >
-              {/* <Movie /> */}
+              <Movie movie={movie} media_type='tv' />
             </Grid>
           ))}
         </Grid>
