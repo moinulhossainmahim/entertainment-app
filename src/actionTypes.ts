@@ -18,17 +18,14 @@ export enum ActionType {
   ERROR = "ERROR",
   END_LOADING = "END_LOADING",
   FETCH_SINGLE_MOVIE = "FETCH_SINGLE_MOVIE",
+  FETCH_TRENDING = "FETCH_TRENDING",
 }
 
 interface loading {
-  type: ActionType.LOADING;
-}
-
-interface endLoading {
-  type: ActionType.END_LOADING;
+  type: ActionType.LOADING | ActionType.END_LOADING;
 }
 interface fetchMovies {
-  type: ActionType.FETCH_MOVIES;
+  type: ActionType.FETCH_MOVIES | ActionType.FETCH_TRENDING;
   payload: MovieType[];
 }
 
@@ -42,9 +39,4 @@ interface fetchSingleMovie {
   payload: MovieType;
 }
 
-export type Action =
-  | loading
-  | fetchMovies
-  | failFetching
-  | endLoading
-  | fetchSingleMovie;
+export type Action = loading | fetchMovies | failFetching | fetchSingleMovie;

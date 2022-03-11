@@ -37,7 +37,7 @@ const Movie = ({ movie, media_type }: movie) => {
           </Typography>
           <Box className={classes.movieInfo}>
             <Typography variant='body1' paragraph className={classes.mediaType}>
-              {movie.media_type === "tv" ? "Tv Series" : movie.media_type}
+              {media_type === "tv" ? "Tv Series" : media_type}
             </Typography>
             <Typography variant='body1' paragraph>
               {movie.release_date || movie.first_air_date}

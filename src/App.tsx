@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
-import { SinglePage, MoviesPage, ErrorPage } from "./components/Pages";
+import { SinglePage, MoviesPage, ErrorPage, Home } from "./components/Pages";
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        {/* <Route path='/' element={<Home />} /> */}
+        <Route path='/' element={<Home />} />
         <Route path='/movies' element={<MoviesPage />} />
         {/* <Route path='/tvseries' element={<TvSeriesPage />} /> */}
         <Route path='/:media_type/:id' element={<SinglePage />} />

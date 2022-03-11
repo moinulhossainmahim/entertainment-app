@@ -44,7 +44,7 @@ const SingleMovies = () => {
               {singleMovie?.tagline}
             </Typography>
             <Typography variant='body1' paragraph gutterBottom>
-              {singleMovie?.overview}
+              overview: {singleMovie?.overview}
             </Typography>
             <Button variant='contained' color='secondary'>
               Watch The trailers
