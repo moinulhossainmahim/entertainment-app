@@ -3,31 +3,26 @@ import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Movie from "./Movie/Movie";
-import { LoadingSpinner } from "../../Loading/Loading";
+import Loading from "../../Loading";
 import { useEffect } from "react";
 import { fetchMovies } from "../../actions/movies";
-
-enum LoaderKeys {
-  movies = "movies",
-}
+import { LoaderKeys } from "../../reducers/loader";
 
 const Movies = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const {
-    loader: { isLoading, key },
-    movies: { list },
-  } = useTypedSelector((state) => state);
+  const loader = useTypedSelector((state) => state.loader);
+  const movies = useTypedSelector((state) => state.movies.list);
 
   useEffect(() => {
-    if (!list.length) {
+    if (!movies.length) {
       dispatch(fetchMovies());
     }
   }, []);
 
-  return key === LoaderKeys.movies && isLoading ? (
+  return loader.key === LoaderKeys.Movies && loader.isLoading ? (
     <Container maxWidth='md'>
-      <LoadingSpinner />
+      <Loading />
     </Container>
   ) : (
     <Container maxWidth={false} className={classes.moviesContainer}>
@@ -40,7 +35,7 @@ const Movies = () => {
         Discover Movies
       </Typography>
       <Grid container justifyContent='center' spacing={4}>
-        {list.map((movie) => (
+        {movies.map((movie) => (
           <Grid
             key={movie.id}
             item

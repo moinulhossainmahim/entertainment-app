@@ -13,4 +13,7 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
     flexDirection: "column",
   },
+  btn: {
+    textDecoration: "none",
+  },
 }));

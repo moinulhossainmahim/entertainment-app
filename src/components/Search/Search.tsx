@@ -18,7 +18,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import { Search } from "@material-ui/icons";
-import { LoadingSpinner } from "../../Loading/Loading";
+import Loading from "../../Loading";
 import { fetchSearchMedia } from "../../actions/search";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
@@ -50,7 +50,6 @@ const SearchMovie = () => {
     if (type === 0) return "movie";
     else return "tv";
   };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const media_type = typeOfMedia(type);
@@ -59,7 +58,7 @@ const SearchMovie = () => {
 
   return key === LoaderKeys.search && isLoading ? (
     <Container maxWidth='md'>
-      <LoadingSpinner />
+      <Loading />
     </Container>
   ) : (
     <Container maxWidth={false} className={classes.moviesContainer}>

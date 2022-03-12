@@ -4,30 +4,24 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
-import { LoadingSpinner } from "../../Loading/Loading";
+import Loading from "../../Loading";
 import { fetchTrending } from "../../actions/movies";
-
-enum LoaderKeys {
-  trending = "trending",
-}
+import { LoaderKeys } from "../../reducers/loader";
 
 const Trending = () => {
   const dispatch = useDispatch();
-  const {
-    loader: { key, isLoading },
-    trending: { list },
-  } = useTypedSelector((state) => state);
+  const trendingMovies = useTypedSelector((state) => state.trending.list);
+  const loader = useTypedSelector((state) => state.loader);
   const classes = useStyles();
 
   useEffect(() => {
-    if (!list.length) {
+    if (!trendingMovies.length) {
       dispatch(fetchTrending());
     }
   }, []);
-
-  return key === LoaderKeys.trending && isLoading ? (
+  return loader.key === LoaderKeys.Trending && loader.isLoading ? (
     <Container maxWidth='md' className={classes.moviesContainer}>
-      <LoadingSpinner />
+      <Loading />
     </Container>
   ) : (
     <Container maxWidth={false} className={classes.moviesContainer}>
@@ -40,9 +34,9 @@ const Trending = () => {
         Trending Today
       </Typography>
       <Grid container justifyContent='center' spacing={4}>
-        {list.map((item) => (
+        {trendingMovies.map((movie) => (
           <Grid
-            key={item.id}
+            key={movie.id}
             item
             xs={12}
             md={4}
@@ -50,7 +44,7 @@ const Trending = () => {
             sm={6}
             className={classes.mainCard}
           >
-            <Movie movie={item} media_type={item.media_type} />
+            <Movie movie={movie} media_type={movie.media_type} />
           </Grid>
         ))}
       </Grid>

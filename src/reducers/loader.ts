@@ -1,5 +1,12 @@
 import { ActionType, Action, LoaderType } from "../actionTypes";
 
+export enum LoaderKeys {
+  Trending = "trending",
+  Movies = "movies",
+  TvSeries = "tvSeries",
+  SingleMedia = "singleMedia",
+}
+
 type State = LoaderType;
 
 const initialState = {
@@ -10,7 +17,11 @@ const initialState = {
 const loaderReducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.LOADER:
-      return { state: action.payload };
+      return {
+        ...state,
+        key: action.payload.key,
+        isLoading: action.payload.isLoading,
+      };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import { CircularProgress, Box } from "@material-ui/core";
 
-export const LoadingSpinner = () => {
+export default function Loading() {
   return (
     <Box
       style={{
@@ -12,4 +12,4 @@ export const LoadingSpinner = () => {
       <CircularProgress />
     </Box>
   );
-};
+}

@@ -1,41 +1,49 @@
 import { useEffect } from "react";
 import { Button, Container, Grid, Typography } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
-import { LoadingSpinner } from "../../Loading/Loading";
+import Loading from "../../Loading";
 import { fetchSingleMedia } from "../../actions/movies";
+import { image } from "../../images/image";
+import { LoaderKeys } from "../../reducers/loader";
 
-enum LoaderKeys {
-  singleMedia = "singleMedia",
-}
-
-const SingleMovies = () => {
+const SingleMovie = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id, media_type } = useParams();
-  const {
-    loader: { isLoading, key },
-    singleMedia: { media },
-  } = useTypedSelector((state) => state);
+  const loader = useTypedSelector((state) => state.loader);
+  const media = useTypedSelector((state) => state.singleMedia.media);
+
+  const mediaType = (type: string | undefined) => {
+    if (type === "movie") {
+      return "movies";
+    } else if (type === "tv") {
+      return "tvseries";
+    } else if (type === "trending") {
+      return "trending";
+    }
+  };
 
   useEffect(() => {
-    if (!media) {
-      dispatch(fetchSingleMedia(media_type, id));
-    }
+    dispatch(fetchSingleMedia(media_type, id));
   }, []);
 
-  return key === LoaderKeys.singleMedia && isLoading ? (
+  return loader.key === LoaderKeys.SingleMedia && loader.isLoading ? (
     <Container maxWidth='md' className={classes.movieContainer}>
-      <LoadingSpinner />
+      <Loading />
     </Container>
   ) : (
     <Container maxWidth='md' className={classes.movieContainer}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <img
-            src={`https://image.tmdb.org/t/p/w500/${media?.poster_path}`}
+            src={
+              media?.poster_path === null
+                ? image
+                : `https://image.tmdb.org/t/p/w500/${media?.poster_path}`
+            }
             alt='Imgae'
             className={classes.movieImage}
           />
@@ -50,13 +58,15 @@ const SingleMovies = () => {
           <Typography variant='body1' paragraph gutterBottom>
             overview: {media?.overview}
           </Typography>
-          <Button variant='contained' color='secondary'>
-            Watch The trailers
-          </Button>
+          <Link to={`/${mediaType(media_type)}`} className={classes.btn}>
+            <Button variant='contained' color='secondary'>
+              back to {media_type}
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </Container>
   );
 };
 
-export default SingleMovies;
+export default SingleMovie;

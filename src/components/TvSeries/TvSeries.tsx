@@ -4,7 +4,7 @@ import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
-import { LoadingSpinner } from "../../Loading/Loading";
+import Loading from "../../Loading";
 import { fetchTvSeries } from "../../actions/movies";
 
 enum LoaderKeys {
@@ -13,21 +13,19 @@ enum LoaderKeys {
 
 const TvSeries = () => {
   const dispatch = useDispatch();
-  const {
-    loader: { isLoading, key },
-    tvSeries: { list },
-  } = useTypedSelector((state) => state);
   const classes = useStyles();
+  const loader = useTypedSelector((state) => state.loader);
+  const tvSeries = useTypedSelector((state) => state.tvSeries.list);
 
   useEffect(() => {
-    if (!list.length) {
+    if (!tvSeries.length) {
       dispatch(fetchTvSeries());
     }
   }, []);
 
-  return key === LoaderKeys.tvseries && isLoading ? (
+  return loader.key === LoaderKeys.tvseries && loader.isLoading ? (
     <Container maxWidth='md' className={classes.moviesContainer}>
-      <LoadingSpinner />
+      <Loading />
     </Container>
   ) : (
     <Container maxWidth={false} className={classes.moviesContainer}>
@@ -40,9 +38,9 @@ const TvSeries = () => {
         Discover Series
       </Typography>
       <Grid container justifyContent='center' spacing={4}>
-        {list.map((movie) => (
+        {tvSeries.map((media) => (
           <Grid
-            key={movie.id}
+            key={media.id}
             item
             xs={12}
             md={4}
@@ -50,7 +48,7 @@ const TvSeries = () => {
             sm={6}
             className={classes.mainCard}
           >
-            <Movie movie={movie} media_type='tv' />
+            <Movie movie={media} media_type='tv' />
           </Grid>
         ))}
       </Grid>

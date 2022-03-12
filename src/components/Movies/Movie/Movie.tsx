@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 import { MovieType } from "../../../actionTypes";
+import { image } from "../../../images/image";
 
 type movie = {
   movie: MovieType;
@@ -23,7 +24,11 @@ const Movie = ({ movie, media_type }: movie) => {
       <Badge badgeContent={movie.vote_average} color='primary' />
       <Card className={classes.card}>
         <CardMedia
-          image={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+          image={
+            movie.poster_path === null
+              ? image
+              : `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
+          }
           className={classes.cardMedia}
         />
         <CardContent>
