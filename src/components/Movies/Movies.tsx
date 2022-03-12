@@ -5,7 +5,7 @@ import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Movie from "./Movie/Movie";
 import Loading from "../../Loading";
 import { useEffect } from "react";
-import { fetchMovies } from "../../actions/movies";
+import { fetchMedia } from "../../actions/media";
 import { LoaderKeys } from "../../reducers/loader";
 
 const Movies = () => {
@@ -16,7 +16,7 @@ const Movies = () => {
 
   useEffect(() => {
     if (!movies.length) {
-      dispatch(fetchMovies());
+      dispatch(fetchMedia("movie"));
     }
   }, []);
 

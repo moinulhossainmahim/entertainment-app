@@ -5,7 +5,7 @@ import Movie from "../Movies/Movie/Movie";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Loading from "../../Loading";
-import { fetchTvSeries } from "../../actions/movies";
+import { fetchMedia } from "../../actions/media";
 
 enum LoaderKeys {
   tvseries = "tvseries",
@@ -19,7 +19,7 @@ const TvSeries = () => {
 
   useEffect(() => {
     if (!tvSeries.length) {
-      dispatch(fetchTvSeries());
+      dispatch(fetchMedia("tv"));
     }
   }, []);
 

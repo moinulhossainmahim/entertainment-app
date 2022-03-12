@@ -5,7 +5,7 @@ import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Loading from "../../Loading";
-import { fetchSingleMedia } from "../../actions/movies";
+import { fetchSingleMedia } from "../../actions/media";
 import { image } from "../../images/image";
 import { LoaderKeys } from "../../reducers/loader";
 

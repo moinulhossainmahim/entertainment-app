@@ -5,7 +5,7 @@ import { useTypedSelector } from "../../utilities/useTypeSelector";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
 import Loading from "../../Loading";
-import { fetchTrending } from "../../actions/movies";
+import { fetchTrending } from "../../actions/media";
 import { LoaderKeys } from "../../reducers/loader";
 
 const Trending = () => {
