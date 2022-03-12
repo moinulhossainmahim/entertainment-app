@@ -7,51 +7,54 @@ import Movie from "../Movies/Movie/Movie";
 import { LoadingSpinner } from "../../Loading/Loading";
 import { fetchTrending } from "../../actions/movies";
 
+enum LoaderKeys {
+  trending = "trending",
+}
+
 const Trending = () => {
   const dispatch = useDispatch();
-  const { isLoading, list } = useTypedSelector((state) => state.trending);
+  const {
+    loader: { key, isLoading },
+    trending: { list },
+  } = useTypedSelector((state) => state);
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(fetchTrending());
+    if (!list.length) {
+      dispatch(fetchTrending());
+    }
   }, []);
 
-  if (isLoading) {
-    return (
-      <Container maxWidth='md' className={classes.moviesContainer}>
-        <LoadingSpinner />
-      </Container>
-    );
-  }
-
-  return (
-    <>
-      <Container maxWidth={false} className={classes.moviesContainer}>
-        <Typography
-          align='center'
-          variant='h4'
-          gutterBottom
-          style={{ color: "white", textTransform: "uppercase" }}
-        >
-          Trending Today
-        </Typography>
-        <Grid container justifyContent='center' spacing={4}>
-          {list.map((item) => (
-            <Grid
-              key={item.id}
-              item
-              xs={12}
-              md={4}
-              lg={3}
-              sm={6}
-              className={classes.mainCard}
-            >
-              <Movie movie={item} media_type={item.media_type} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </>
+  return key === LoaderKeys.trending && isLoading ? (
+    <Container maxWidth='md' className={classes.moviesContainer}>
+      <LoadingSpinner />
+    </Container>
+  ) : (
+    <Container maxWidth={false} className={classes.moviesContainer}>
+      <Typography
+        align='center'
+        variant='h4'
+        gutterBottom
+        style={{ color: "white", textTransform: "uppercase" }}
+      >
+        Trending Today
+      </Typography>
+      <Grid container justifyContent='center' spacing={4}>
+        {list.map((item) => (
+          <Grid
+            key={item.id}
+            item
+            xs={12}
+            md={4}
+            lg={3}
+            sm={6}
+            className={classes.mainCard}
+          >
+            <Movie movie={item} media_type={item.media_type} />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

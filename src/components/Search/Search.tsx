@@ -23,12 +23,19 @@ import { fetchSearchMedia } from "../../actions/search";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
 
+enum LoaderKeys {
+  search = "search",
+}
+
 const SearchMovie = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [type, setType] = useState(0);
   const [query, setQuery] = useState("");
-  const { isLoading, media_list } = useTypedSelector((state) => state.search);
+  const {
+    loader: { isLoading, key },
+    search: { media_list },
+  } = useTypedSelector((state) => state);
 
   const darkTheme = createTheme({
     palette: {
@@ -38,14 +45,6 @@ const SearchMovie = () => {
       },
     },
   });
-
-  if (isLoading) {
-    return (
-      <Container maxWidth='md'>
-        <LoadingSpinner />
-      </Container>
-    );
-  }
 
   const typeOfMedia = (type: number) => {
     if (type === 0) return "movie";
@@ -58,7 +57,11 @@ const SearchMovie = () => {
     dispatch(fetchSearchMedia(media_type, query));
   };
 
-  return (
+  return key === LoaderKeys.search && isLoading ? (
+    <Container maxWidth='md'>
+      <LoadingSpinner />
+    </Container>
+  ) : (
     <Container maxWidth={false} className={classes.moviesContainer}>
       <div className={classes.searchWrapper}>
         <ThemeProvider theme={darkTheme}>

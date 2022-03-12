@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import loaderReducer from "./loader";
 import movieReducer from "./movies";
 import searchReducer from "./search";
 import singleMediaReducer from "./singleMedia";
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   trending: trendingReducer,
   movies: movieReducer,
   search: searchReducer,
+  loader: loaderReducer,
 });
 
 export default rootReducer;

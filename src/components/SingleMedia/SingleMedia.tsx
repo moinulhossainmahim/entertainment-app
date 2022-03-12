@@ -5,54 +5,57 @@ import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import { LoadingSpinner } from "../../Loading/Loading";
-import { fetchSingleMovie } from "../../actions/movies";
+import { fetchSingleMedia } from "../../actions/movies";
+
+enum LoaderKeys {
+  singleMedia = "singleMedia",
+}
 
 const SingleMovies = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id, media_type } = useParams();
-  const { isLoading, media } = useTypedSelector((state) => state.singleMedia);
+  const {
+    loader: { isLoading, key },
+    singleMedia: { media },
+  } = useTypedSelector((state) => state);
 
   useEffect(() => {
-    dispatch(fetchSingleMovie(media_type, id));
+    if (!media) {
+      dispatch(fetchSingleMedia(media_type, id));
+    }
   }, []);
 
-  if (isLoading) {
-    return (
-      <Container maxWidth='md' className={classes.movieContainer}>
-        <LoadingSpinner />
-      </Container>
-    );
-  }
-
-  return (
-    <>
-      <Container maxWidth='md' className={classes.movieContainer}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${media?.poster_path}`}
-              alt='Imgae'
-              className={classes.movieImage}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} className={classes.movieDetails}>
-            <Typography variant='h3' gutterBottom>
-              {media?.title || media?.original_name || media?.original_title}
-            </Typography>
-            <Typography variant='h6' gutterBottom>
-              {media?.tagline}
-            </Typography>
-            <Typography variant='body1' paragraph gutterBottom>
-              overview: {media?.overview}
-            </Typography>
-            <Button variant='contained' color='secondary'>
-              Watch The trailers
-            </Button>
-          </Grid>
+  return key === LoaderKeys.singleMedia && isLoading ? (
+    <Container maxWidth='md' className={classes.movieContainer}>
+      <LoadingSpinner />
+    </Container>
+  ) : (
+    <Container maxWidth='md' className={classes.movieContainer}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${media?.poster_path}`}
+            alt='Imgae'
+            className={classes.movieImage}
+          />
         </Grid>
-      </Container>
-    </>
+        <Grid item xs={12} sm={6} className={classes.movieDetails}>
+          <Typography variant='h3' gutterBottom>
+            {media?.title || media?.original_name || media?.original_title}
+          </Typography>
+          <Typography variant='h6' gutterBottom>
+            {media?.tagline}
+          </Typography>
+          <Typography variant='body1' paragraph gutterBottom>
+            overview: {media?.overview}
+          </Typography>
+          <Button variant='contained' color='secondary'>
+            Watch The trailers
+          </Button>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 

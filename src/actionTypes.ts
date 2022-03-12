@@ -12,19 +12,26 @@ export interface MovieType {
   tagline: string;
 }
 
+export interface LoaderType {
+  isLoading: true | false;
+  key: string;
+}
+
 export enum ActionType {
-  LOADING = "LOADING",
+  LOADER = "LOADER",
   FETCH_MOVIES = "FETCH_MOVIES",
   ERROR = "ERROR",
-  END_LOADING = "END_LOADING",
   FETCH_SINGLE_MEDIA = "FETCH_SINGLE_MEDIA",
   FETCH_TRENDING = "FETCH_TRENDING",
   FETCH_TVSERIES = "FETCH_TVSERIES",
   SEARCH_MEDIA = "SEARCH_MEDIA",
 }
+
 interface loading {
-  type: ActionType.LOADING | ActionType.END_LOADING;
+  type: ActionType.LOADER;
+  payload: LoaderType;
 }
+
 interface fetchMovies {
   type:
     | ActionType.FETCH_MOVIES
