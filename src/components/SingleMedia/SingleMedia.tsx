@@ -11,11 +11,11 @@ const SingleMovies = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id, media_type } = useParams();
-  const { isLoading, singleMovie } = useTypedSelector((state) => state.movies);
+  const { isLoading, media } = useTypedSelector((state) => state.singleMedia);
 
   useEffect(() => {
     dispatch(fetchSingleMovie(media_type, id));
-  }, [media_type, id]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -31,22 +31,20 @@ const SingleMovies = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <img
-              src={`https://image.tmdb.org/t/p/w500/${singleMovie?.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500/${media?.poster_path}`}
               alt='Imgae'
               className={classes.movieImage}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.movieDetails}>
             <Typography variant='h3' gutterBottom>
-              {singleMovie?.title ||
-                singleMovie?.original_name ||
-                singleMovie?.original_title}
+              {media?.title || media?.original_name || media?.original_title}
             </Typography>
             <Typography variant='h6' gutterBottom>
-              {singleMovie?.tagline}
+              {media?.tagline}
             </Typography>
             <Typography variant='body1' paragraph gutterBottom>
-              overview: {singleMovie?.overview}
+              overview: {media?.overview}
             </Typography>
             <Button variant='contained' color='secondary'>
               Watch The trailers

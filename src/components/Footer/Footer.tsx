@@ -19,7 +19,7 @@ export default function Footer() {
     } else if (value === 3) {
       navigate("/search");
     }
-  }, [value, navigate]);
+  }, [value]);
 
   return (
     <BottomNavigation

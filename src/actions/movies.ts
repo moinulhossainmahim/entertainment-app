@@ -26,7 +26,7 @@ export const fetchSingleMovie =
       const { data: movie } = await axios.get(
         `https://api.themoviedb.org/3/${media_type}/${id}?api_key=f41ca7cfda77d7a7d04c7c1e517633b9&language=en-US`
       );
-      dispatch({ type: ActionType.FETCH_SINGLE_MOVIE, payload: movie });
+      dispatch({ type: ActionType.FETCH_SINGLE_MEDIA, payload: movie });
       dispatch({ type: ActionType.END_LOADING });
     } catch (error: any) {
       dispatch({ type: ActionType.ERROR, payload: error.message });

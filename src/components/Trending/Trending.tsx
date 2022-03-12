@@ -9,7 +9,7 @@ import { fetchTrending } from "../../actions/movies";
 
 const Trending = () => {
   const dispatch = useDispatch();
-  const { isLoading, movieList } = useTypedSelector((state) => state.movies);
+  const { isLoading, list } = useTypedSelector((state) => state.trending);
   const classes = useStyles();
 
   useEffect(() => {
@@ -36,9 +36,9 @@ const Trending = () => {
           Trending Today
         </Typography>
         <Grid container justifyContent='center' spacing={4}>
-          {movieList.map((movie) => (
+          {list.map((item) => (
             <Grid
-              key={movie.id}
+              key={item.id}
               item
               xs={12}
               md={4}
@@ -46,7 +46,7 @@ const Trending = () => {
               sm={6}
               className={classes.mainCard}
             >
-              <Movie movie={movie} media_type={movie.media_type} />
+              <Movie movie={item} media_type={item.media_type} />
             </Grid>
           ))}
         </Grid>

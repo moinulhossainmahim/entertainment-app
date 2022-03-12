@@ -24,6 +24,7 @@ export default makeStyles((theme) => ({
   moviesContainer: {
     backgroundColor: "#39445A",
     padding: "5%",
+    minHeight: "calc(100vh - 11rem)",
   },
   movieInfo: {
     display: "flex",

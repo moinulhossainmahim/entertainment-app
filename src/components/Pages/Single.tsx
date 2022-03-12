@@ -1,4 +1,4 @@
-import SingleMovieDetails from "../SingleMovies/SingleMovies";
+import SingleMovieDetails from "../SingleMedia/SingleMedia";
 
 const SinglePage = () => {
   return (

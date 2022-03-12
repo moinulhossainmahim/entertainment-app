@@ -9,7 +9,7 @@ import { fetchTvSeries } from "../../actions/movies";
 
 const TvSeries = () => {
   const dispatch = useDispatch();
-  const { isLoading, movieList } = useTypedSelector((state) => state.movies);
+  const { isLoading, list } = useTypedSelector((state) => state.movies);
   const classes = useStyles();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const TvSeries = () => {
           Discover Series
         </Typography>
         <Grid container justifyContent='center' spacing={4}>
-          {movieList.map((movie) => (
+          {list.map((movie) => (
             <Grid
               key={movie.id}
               item

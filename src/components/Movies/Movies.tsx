@@ -10,15 +10,17 @@ import { fetchMovies } from "../../actions/movies";
 const Movies = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { isLoading, movieList } = useTypedSelector((state) => state.movies);
+  const { isLoading, list } = useTypedSelector((state) => state.movies);
 
   useEffect(() => {
-    dispatch(fetchMovies());
+    if (!list.length) {
+      dispatch(fetchMovies());
+    }
   }, []);
 
   if (isLoading) {
     return (
-      <Container maxWidth='md' className={classes.moviesContainer}>
+      <Container maxWidth='md'>
         <LoadingSpinner />
       </Container>
     );
@@ -36,7 +38,7 @@ const Movies = () => {
           Discover Movies
         </Typography>
         <Grid container justifyContent='center' spacing={4}>
-          {movieList.map((movie) => (
+          {list.map((movie) => (
             <Grid
               key={movie.id}
               item
