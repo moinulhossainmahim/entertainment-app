@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+import { Button, Container, Grid, Typography, Chip } from "@material-ui/core";
+import { AddCircleOutlined } from "@material-ui/icons";
 import { useParams, Link } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
@@ -16,28 +17,20 @@ const SingleMovie = () => {
   const loader = useTypedSelector((state) => state.loader);
   const media = useTypedSelector((state) => state.singleMedia.media);
 
-  const mediaType = (type: string | undefined) => {
-    if (type === "movie") {
-      return "movies";
-    } else if (type === "tv") {
-      return "tvseries";
-    } else if (type === "trending") {
-      return "trending";
-    }
-  };
-
   useEffect(() => {
     dispatch(fetchSingleMedia(media_type, id));
-  }, []);
+  }, [id]);
+
+  const handleClick = () => {};
 
   return loader.key === LoaderKeys.SingleMedia && loader.isLoading ? (
     <Container maxWidth='md' className={classes.movieContainer}>
       <Loading />
     </Container>
   ) : (
-    <Container maxWidth='md' className={classes.movieContainer}>
+    <Container className={classes.movieContainer} maxWidth={false}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item sm={12} md={6}>
           <img
             src={
               media?.poster_path === null
@@ -48,21 +41,38 @@ const SingleMovie = () => {
             className={classes.movieImage}
           />
         </Grid>
-        <Grid item xs={12} sm={6} className={classes.movieDetails}>
-          <Typography variant='h3' gutterBottom>
+        <Grid item sm={12} md={6}>
+          <Typography variant='h3'>
             {media?.title || media?.original_name || media?.original_title}
           </Typography>
           <Typography variant='h6' gutterBottom>
             {media?.tagline}
           </Typography>
-          <Typography variant='body1' paragraph gutterBottom>
-            overview: {media?.overview}
+          <Typography variant='h6' className={classes.heading}>
+            The Genres
           </Typography>
-          <Link to={`/${mediaType(media_type)}`} className={classes.btn}>
-            <Button variant='contained' color='secondary'>
-              back to {media_type}
-            </Button>
-          </Link>
+          <div className={classes.genre}>
+            {media?.genres.map((genre) => {
+              return (
+                <Chip
+                  icon={<AddCircleOutlined />}
+                  label={genre.name}
+                  onClick={handleClick}
+                  key={genre.id}
+                  className={classes.chip}
+                />
+              );
+            })}
+          </div>
+          <Typography variant='h6' className={classes.heading} gutterBottom>
+            The synopsis
+          </Typography>
+          <Typography variant='body1' paragraph gutterBottom>
+            {media?.overview}
+          </Typography>
+          <Typography variant='h6' className={classes.heading} gutterBottom>
+            The cast
+          </Typography>
         </Grid>
       </Grid>
     </Container>

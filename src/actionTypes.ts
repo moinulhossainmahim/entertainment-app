@@ -1,3 +1,8 @@
+interface GenreType {
+  id: number;
+  name: string;
+}
+
 export interface MovieType {
   poster_path: string;
   release_date: string;
@@ -10,6 +15,7 @@ export interface MovieType {
   first_air_date: string;
   overview: string;
   tagline: string;
+  genres: GenreType[];
 }
 
 export interface LoaderType {
@@ -25,6 +31,7 @@ export enum ActionType {
   FETCH_TRENDING = "FETCH_TRENDING",
   FETCH_TVSERIES = "FETCH_TVSERIES",
   SEARCH_MEDIA = "SEARCH_MEDIA",
+  FETCH_RECOMMENDED = "FETCH_RECOMMENDED",
 }
 
 interface loading {
@@ -37,7 +44,8 @@ interface fetchMovies {
     | ActionType.FETCH_MOVIES
     | ActionType.FETCH_TRENDING
     | ActionType.FETCH_TVSERIES
-    | ActionType.SEARCH_MEDIA;
+    | ActionType.SEARCH_MEDIA
+    | ActionType.FETCH_RECOMMENDED;
   payload: MovieType[];
 }
 

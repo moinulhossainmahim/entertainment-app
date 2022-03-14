@@ -13,7 +13,7 @@ import { image } from "../../../images/image";
 
 type movie = {
   movie: MovieType;
-  media_type: string;
+  media_type: string | undefined;
 };
 
 const Movie = ({ movie, media_type }: movie) => {

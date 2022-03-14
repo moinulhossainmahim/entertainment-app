@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Footer from "./components/Footer/Footer";
+// import Footer from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
 import {
   SinglePage,
@@ -22,7 +22,6 @@ function App() {
         <Route path='/search' element={<SearchPage />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
-      <Footer />
     </Router>
   );
 }
