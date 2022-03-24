@@ -3,10 +3,19 @@ interface GenreType {
   name: string;
 }
 
+export interface Cast {
+  cast_id: number;
+  id: number;
+  name: string;
+  profile_path: string;
+  original_name: string;
+}
+
 export interface MovieType {
   poster_path: string;
   release_date: string;
   vote_average: number;
+  imdb_id: string;
   title: string;
   id: number;
   original_title: string;
@@ -32,6 +41,7 @@ export enum ActionType {
   FETCH_TVSERIES = "FETCH_TVSERIES",
   SEARCH_MEDIA = "SEARCH_MEDIA",
   FETCH_RECOMMENDED = "FETCH_RECOMMENDED",
+  FETCH_CASTS = "FETCH_CASTS",
 }
 
 interface loading {
@@ -59,4 +69,14 @@ interface fetchSingleMovie {
   payload: MovieType;
 }
 
-export type Action = loading | fetchMovies | failFetching | fetchSingleMovie;
+interface fetchCasts {
+  type: ActionType.FETCH_CASTS;
+  payload: Cast[];
+}
+
+export type Action =
+  | loading
+  | fetchMovies
+  | failFetching
+  | fetchSingleMovie
+  | fetchCasts;

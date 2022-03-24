@@ -13,7 +13,7 @@ const Error = () => {
         Sorry, the page you tried cannot be found
       </Typography>
       <Link to='/' className={classes.btn}>
-        <Button variant='contained' color='secondary'>
+        <Button variant='contained' color='default'>
           back home
         </Button>
       </Link>

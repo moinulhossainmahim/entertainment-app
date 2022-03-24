@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import castReducer from "./casts";
 import loaderReducer from "./loader";
 import movieReducer from "./movies";
 import recommendedMediaReducer from "./recommendedMedia";
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   movies: movieReducer,
   search: searchReducer,
   loader: loaderReducer,
+  casts: castReducer,
 });
 
 export default rootReducer;

@@ -1,14 +1,15 @@
 import { useEffect } from "react";
-import { Button, Container, Grid, Typography, Chip } from "@material-ui/core";
-import { AddCircleOutlined } from "@material-ui/icons";
-import { useParams, Link } from "react-router-dom";
+import { Container, Grid, Typography, Chip } from "@material-ui/core";
+import { useParams } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Loading from "../../Loading";
 import { fetchSingleMedia } from "../../actions/media";
+import { fetchCasts } from "../../actions/casts";
 import { image } from "../../images/image";
 import { LoaderKeys } from "../../reducers/loader";
+import CastSlider from "../cast-slider/CastSlider";
 
 const SingleMovie = () => {
   const classes = useStyles();
@@ -16,10 +17,12 @@ const SingleMovie = () => {
   const { id, media_type } = useParams();
   const loader = useTypedSelector((state) => state.loader);
   const media = useTypedSelector((state) => state.singleMedia.media);
+  const casts = useTypedSelector((state) => state.casts.casts);
 
   useEffect(() => {
     dispatch(fetchSingleMedia(media_type, id));
-  }, [id]);
+    dispatch(fetchCasts(media_type, id));
+  }, [media_type, id]);
 
   const handleClick = () => {};
 
@@ -29,11 +32,11 @@ const SingleMovie = () => {
     </Container>
   ) : (
     <Container className={classes.movieContainer} maxWidth={false}>
-      <Grid container spacing={2}>
+      <Grid container spacing={4}>
         <Grid item sm={12} md={6}>
           <img
             src={
-              media?.poster_path === null
+              media?.poster_path === null || undefined
                 ? image
                 : `https://image.tmdb.org/t/p/w500/${media?.poster_path}`
             }
@@ -55,7 +58,6 @@ const SingleMovie = () => {
             {media?.genres.map((genre) => {
               return (
                 <Chip
-                  icon={<AddCircleOutlined />}
                   label={genre.name}
                   onClick={handleClick}
                   key={genre.id}
@@ -73,6 +75,7 @@ const SingleMovie = () => {
           <Typography variant='h6' className={classes.heading} gutterBottom>
             The cast
           </Typography>
+          <CastSlider casts={casts} />
         </Grid>
       </Grid>
     </Container>

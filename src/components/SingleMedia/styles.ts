@@ -2,8 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export default makeStyles((theme) => ({
   movieContainer: {
-    padding: "2rem 15vw",
-    minHeight: "100%",
+    padding: "5% 10%",
     backgroundColor: "#39445A",
     color: "#c6c6c6",
   },
