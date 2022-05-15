@@ -3,6 +3,15 @@ interface GenreType {
   name: string;
 }
 
+interface Results {
+  id: string;
+  key: string;
+  site: string;
+  type: string;
+}
+export interface Video {
+  results: Results[];
+}
 export interface Cast {
   cast_id: number;
   id: number;
@@ -24,9 +33,10 @@ export interface MovieType {
   first_air_date: string;
   overview: string;
   tagline: string;
+  homepage: string;
   genres: GenreType[];
+  videos: Video;
 }
-
 export interface LoaderType {
   isLoading: true | false;
   key: string;

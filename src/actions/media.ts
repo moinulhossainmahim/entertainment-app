@@ -46,7 +46,7 @@ export const fetchSingleMedia =
     });
     try {
       const { data: movie } = await axios.get(
-        `https://api.themoviedb.org/3/${media_type}/${id}?api_key=f41ca7cfda77d7a7d04c7c1e517633b9&language=en-US`
+        `https://api.themoviedb.org/3/${media_type}/${id}?api_key=f41ca7cfda77d7a7d04c7c1e517633b9&language=en-US&append_to_response=videos`
       );
       dispatch({ type: ActionType.FETCH_SINGLE_MEDIA, payload: movie });
       dispatch({

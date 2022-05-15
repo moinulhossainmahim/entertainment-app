@@ -14,10 +14,10 @@ import { createTheme, ThemeProvider } from "@material-ui/core";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#f3e5f5",
+      main: "#dbd9db",
     },
     secondary: {
-      main: "#39445A",
+      main: "#243453",
     },
   },
 });

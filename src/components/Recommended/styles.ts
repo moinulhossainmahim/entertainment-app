@@ -9,6 +9,6 @@ export default makeStyles((theme) => ({
     padding: "3%",
   },
   noMovieText: {
-    color: "#FEFEFE",
+    color: "#dbd9db",
   },
 }));

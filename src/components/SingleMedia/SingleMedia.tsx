@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Container, Grid, Typography, Chip } from "@material-ui/core";
+import { Container, Grid, Typography, Chip, Button } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ import { fetchCasts } from "../../actions/casts";
 import { image } from "../../images/image";
 import { LoaderKeys } from "../../reducers/loader";
 import CastSlider from "../cast-slider/CastSlider";
+import TrailerModal from "../TrailerModal/TrailerModal";
 
 const SingleMovie = () => {
   const classes = useStyles();
@@ -17,7 +18,6 @@ const SingleMovie = () => {
   const { id, media_type } = useParams();
   const loader = useTypedSelector((state) => state.loader);
   const media = useTypedSelector((state) => state.singleMedia.media);
-  const casts = useTypedSelector((state) => state.casts.casts);
 
   useEffect(() => {
     dispatch(fetchSingleMedia(media_type, id));
@@ -27,18 +27,18 @@ const SingleMovie = () => {
   const handleClick = () => {};
 
   return loader.key === LoaderKeys.SingleMedia && loader.isLoading ? (
-    <Container maxWidth='md' className={classes.movieContainer}>
+    <Container className={classes.movieContainer}>
       <Loading />
     </Container>
   ) : (
     <Container className={classes.movieContainer} maxWidth={false}>
-      <Grid container spacing={4}>
-        <Grid item sm={12} md={6}>
+      <Grid container>
+        <Grid item sm={12} md={6} className={classes.poster}>
           <img
             src={
               media?.poster_path === null || undefined
                 ? image
-                : `https://image.tmdb.org/t/p/w500/${media?.poster_path}`
+                : `https://image.tmdb.org/t/p/w400/${media?.poster_path}`
             }
             alt='Imgae'
             className={classes.movieImage}
@@ -66,16 +66,35 @@ const SingleMovie = () => {
               );
             })}
           </div>
-          <Typography variant='h6' className={classes.heading} gutterBottom>
+          <Typography variant='h6' className={classes.heading}>
             The synopsis
           </Typography>
           <Typography variant='body1' paragraph gutterBottom>
             {media?.overview}
           </Typography>
-          <Typography variant='h6' className={classes.heading} gutterBottom>
-            The cast
-          </Typography>
-          <CastSlider casts={casts} />
+          <div className={classes.actionButton}>
+            {media?.homepage && (
+              <Button
+                variant='contained'
+                color='secondary'
+                target='_blank'
+                href={media.homepage}
+              >
+                Website
+              </Button>
+            )}
+            <Button
+              variant='contained'
+              color='secondary'
+              target='_blank'
+              href={`https://www.imdb.com/title/${media?.imdb_id}`}
+            >
+              Imdb
+            </Button>
+            {media?.videos.results.length !== 0 && (
+              <TrailerModal videos={media?.videos} />
+            )}
+          </div>
         </Grid>
       </Grid>
     </Container>

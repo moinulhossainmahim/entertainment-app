@@ -30,13 +30,13 @@ const Recommended = () => {
         align='center'
         variant='h4'
         gutterBottom
-        style={{ color: "white", textTransform: "uppercase" }}
+        style={{ color: "#dbd9db", textTransform: "uppercase" }}
       >
         Recommended {media_type === "tv" ? "Tv Series" : "Movies"}
       </Typography>
       {recommendedMedias.length === 0 ? (
         <Typography variant='h6' align='center' className={classes.noMovieText}>
-          Oops! Sorry, There is no recommended
+          Sorry, There is no recommended
           {media_type === "tv" ? " Tv Series" : " Movies"}
         </Typography>
       ) : (

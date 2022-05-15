@@ -22,4 +22,13 @@ export default makeStyles((theme) => ({
   chip: {
     marginRight: ".5rem",
   },
+  actionButton: {
+    display: "flex",
+    paddingTop: "4rem",
+    gap: "2rem",
+  },
+  poster: {
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
