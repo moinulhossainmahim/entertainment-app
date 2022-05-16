@@ -27,8 +27,8 @@ const Movie = ({ movie, media_type }: movie) => {
       >
         <Badge badgeContent={movie.vote_average} color='primary' />
         <Card className={classes.card}>
-          <CardMedia
-            image={
+          <img
+            src={
               movie.poster_path === null
                 ? image
                 : `https://image.tmdb.org/t/p/w300/${movie.poster_path}`

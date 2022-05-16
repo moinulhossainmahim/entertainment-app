@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, CssBaseline } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../../images/vector/default-monochrome-white.svg";
+import { ReactComponent as Logo } from "../../images/default-monochrome-white.svg";
 import useStyles from "./styles";
 
 export const Navbar = () => {

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
 import useStyles from "./styles";
 import { Cast } from "./../../actionTypes";
 

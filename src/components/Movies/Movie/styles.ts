@@ -30,7 +30,7 @@ export default makeStyles((theme) => ({
     transform: "scale(1)",
     transition: ".2s linear transform",
     "&:hover": {
-      transform: "scale(1.05)",
+      transform: "scale(1.04)",
     },
   },
 }));
