@@ -70,13 +70,14 @@ export default function TrailerModal({ videos }: videos) {
         onClose={handleClose}
         aria-labelledby='customized-dialog-title'
         open={open}
-        maxWidth={"lg"}
+        maxWidth='md'
+        fullWidth
       >
         <BootstrapDialogTitle
           id='customized-dialog-title'
           onClose={handleClose}
         />
-        <DialogContent>
+        <DialogContent style={{ height: "45vh" }}>
           <iframe
             width='100%'
             height='100%'

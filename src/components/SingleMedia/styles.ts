@@ -19,15 +19,18 @@ export default makeStyles((theme) => ({
   genre: {
     display: "flex",
     padding: "1rem 0",
+    flexWrap: "wrap",
   },
   chip: {
     marginRight: ".5rem",
     cursor: "pointer",
+    marginTop: "1rem",
   },
   actionButton: {
     display: "flex",
     paddingTop: "4rem",
     gap: "2rem",
+    flexWrap: "wrap",
   },
   poster: {
     display: "flex",
