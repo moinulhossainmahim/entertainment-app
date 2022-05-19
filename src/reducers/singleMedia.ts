@@ -1,17 +1,30 @@
-import { Action, ActionType, MovieType } from "../actionTypes";
-interface State {
+import { MovieType } from "../MediaTypes";
+
+export enum SingleMediaActions {
+  SingleMedia = "SINGLE_MEDIA",
+}
+
+export interface SingleMediaStore {
   media: MovieType | null;
   error: string | null;
 }
 
-const initialState = {
+export interface SingleMediaAction {
+  type: SingleMediaActions.SingleMedia;
+  payload: SingleMediaStore;
+}
+
+const initialState: SingleMediaStore = {
   media: null,
   error: null,
 };
 
-const singleMediaReducer = (state: State = initialState, action: Action) => {
+const singleMediaReducer = (
+  state = initialState,
+  action: SingleMediaAction
+) => {
   switch (action.type) {
-    case ActionType.FETCH_SINGLE_MEDIA:
+    case SingleMediaActions.SingleMedia:
       return { ...state, media: action.payload };
     default:
       return state;

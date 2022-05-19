@@ -1,13 +1,23 @@
 import { combineReducers } from "redux";
-import castReducer from "./casts";
-import loaderReducer from "./loader";
-import movieReducer from "./movies";
-import recommendedMediaReducer from "./recommendedMedia";
-import searchReducer from "./search";
-import singleMediaReducer from "./singleMedia";
-import trendingReducer from "./trending";
-import tvSeriesReducer from "./tvSeries";
-import genreMediasReducer from "./genreMedias";
+import loaderReducer, { LoaderStore } from "./loader";
+import movieReducer, { MoviesStore } from "./movies";
+import recommendedMediaReducer, { RecommendedStore } from "./recommendedMedia";
+import searchReducer, { SearchStore } from "./search";
+import singleMediaReducer, { SingleMediaStore } from "./singleMedia";
+import trendingReducer, { TrendingStore } from "./trending";
+import tvSeriesReducer, { TvSeriesStore } from "./tvSeries";
+import genreMediasReducer, { GenresStore } from "./genreMedias";
+
+export interface ReduxStore {
+  loader: LoaderStore;
+  singleMedia: SingleMediaStore;
+  search: SearchStore;
+  genreMedias: GenresStore;
+  recommended: RecommendedStore;
+  movies: MoviesStore;
+  trending: TrendingStore;
+  tvSeries: TvSeriesStore;
+}
 
 const rootReducer = combineReducers({
   genreMedias: genreMediasReducer,
@@ -18,7 +28,6 @@ const rootReducer = combineReducers({
   movies: movieReducer,
   search: searchReducer,
   loader: loaderReducer,
-  casts: castReducer,
 });
 
 export default rootReducer;

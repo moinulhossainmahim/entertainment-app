@@ -1,17 +1,27 @@
-import { Action, ActionType, MovieType } from "../actionTypes";
-interface State {
+import { MovieType } from "../MediaTypes";
+
+export enum MoviesActions {
+  Movies = "Movies",
+}
+
+export interface MoviesStore {
   list: MovieType[];
   error: string | null;
 }
 
-const initialState = {
+export interface MoviesAction {
+  type: MoviesActions.Movies;
+  payload: MoviesStore;
+}
+
+const initialState: MoviesStore = {
   list: [],
   error: null,
 };
 
-const movieReducer = (state: State = initialState, action: Action) => {
+const movieReducer = (state = initialState, action: MoviesAction) => {
   switch (action.type) {
-    case ActionType.FETCH_MOVIES:
+    case MoviesActions.Movies:
       return { ...state, list: action.payload };
     default:
       return state;

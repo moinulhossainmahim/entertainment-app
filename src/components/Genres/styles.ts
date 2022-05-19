@@ -8,6 +8,7 @@ export default makeStyles(() => ({
     backgroundColor: "#39445A",
     padding: "3% 3% 10% 3%",
     minHeight: "100vh",
+    minWidth: "100vw",
   },
   selectForm: {
     maxWidth: "60%",

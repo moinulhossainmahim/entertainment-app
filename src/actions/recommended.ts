@@ -1,13 +1,16 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { Action, ActionType } from "../actionTypes";
-import { LoaderKeys } from "../reducers/loader";
+import { LoaderAction, LoaderActions, LoaderKeys } from "../reducers/loader";
+import {
+  RecommendedAction,
+  RecommendedActions,
+} from "../reducers/recommendedMedia";
 
 export const fetchRecommended =
   (media_type: string | undefined, id: string | undefined) =>
-  async (dispatch: Dispatch<Action>) => {
+  async (dispatch: Dispatch<RecommendedAction | LoaderAction>) => {
     dispatch({
-      type: ActionType.LOADER,
+      type: LoaderActions.Loader,
       payload: { isLoading: true, key: LoaderKeys.RecommendedMedia },
     });
     try {
@@ -17,14 +20,14 @@ export const fetchRecommended =
         `https://api.themoviedb.org/3/${media_type}/${id}/recommendations?api_key=e366d974f73ae203397850eadc7bce1f`
       );
       dispatch({
-        type: ActionType.FETCH_RECOMMENDED,
+        type: RecommendedActions.Recommended,
         payload: recommendedMediaList,
       });
       dispatch({
-        type: ActionType.LOADER,
+        type: LoaderActions.Loader,
         payload: { isLoading: false, key: LoaderKeys.RecommendedMedia },
       });
     } catch (error: any) {
-      dispatch({ type: ActionType.ERROR, payload: error.message });
+      /*  dispatch({ type: ActionType.ERROR, payload: error.message }); */
     }
   };

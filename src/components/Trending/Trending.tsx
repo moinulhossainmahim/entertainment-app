@@ -1,18 +1,20 @@
 import { useEffect } from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../utilities/useTypeSelector";
+import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
 import Loading from "../../Loading";
 import { fetchTrending } from "../../actions/media";
 import { LoaderKeys } from "../../reducers/loader";
+import { ReduxStore } from "../../reducers/rootReducer";
 
 const Trending = () => {
   const dispatch = useDispatch();
-  const trendingMovies = useTypedSelector((state) => state.trending.list);
-  const loader = useTypedSelector((state) => state.loader);
   const classes = useStyles();
+  const loader = useSelector((state: ReduxStore) => state.loader);
+  const trendingMovies = useSelector(
+    (state: ReduxStore) => state.trending.list
+  );
 
   useEffect(() => {
     if (!trendingMovies.length) {

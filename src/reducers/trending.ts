@@ -1,17 +1,27 @@
-import { Action, ActionType, MovieType } from "../actionTypes";
-interface State {
+import { MovieType } from "../MediaTypes";
+
+export enum TrendingActions {
+  Trending = "TRENDING",
+}
+
+export interface TrendingStore {
   list: MovieType[];
   error: string | null;
 }
 
-const initialState = {
+export interface TrendingAction {
+  type: TrendingActions.Trending;
+  payload: TrendingStore;
+}
+
+const initialState: TrendingStore = {
   list: [],
   error: null,
 };
 
-const trendingReducer = (state: State = initialState, action: Action) => {
+const trendingReducer = (state = initialState, action: TrendingAction) => {
   switch (action.type) {
-    case ActionType.FETCH_TRENDING:
+    case TrendingActions.Trending:
       return { ...state, list: action.payload };
     default:
       return state;

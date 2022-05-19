@@ -28,6 +28,7 @@ export default makeStyles((theme) => ({
     backgroundColor: "#39445A",
     padding: "7% 5%",
     minHeight: "calc(100vh - 11rem)",
+    minWidth: "100vw",
   },
   movieInfo: {
     display: "flex",
@@ -41,10 +42,11 @@ export default makeStyles((theme) => ({
     padding: "0 0 5rem 0",
   },
   warningMsg: {
-    color: "#c62121",
+    color: "#d21616",
     position: "absolute",
     top: "-112%",
     left: "17%",
     fontSize: "1.2rem",
+    letterSpacing: "2px",
   },
 }));

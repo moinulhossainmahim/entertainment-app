@@ -9,7 +9,7 @@ export default function Loading() {
         alignItems: "center",
       }}
     >
-      <CircularProgress />
+      <CircularProgress size='4rem' />
     </Box>
   );
 }

@@ -3,26 +3,24 @@ import { Container, Grid, Typography, Chip, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useStyles from "./styles";
-import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../utilities/useTypeSelector";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../Loading";
 import { fetchSingleMedia } from "../../actions/media";
 import { image } from "../../images/image";
 import { LoaderKeys } from "../../reducers/loader";
 import TrailerModal from "../TrailerModal/TrailerModal";
+import { ReduxStore } from "../../reducers/rootReducer";
 
 const SingleMovie = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id, media_type } = useParams();
-  const loader = useTypedSelector((state) => state.loader);
-  const media = useTypedSelector((state) => state.singleMedia.media);
-  const casts = useTypedSelector((state) => state.casts.casts);
+  const loader = useSelector((state: ReduxStore) => state.loader);
+  const media = useSelector((state: ReduxStore) => state.singleMedia.media);
 
   useEffect(() => {
     dispatch(fetchSingleMedia(media_type, id));
-    // dispatch(fetchCasts(media_type, id));
-  }, [media_type, id]);
+  }, [id]);
 
   return loader.key === LoaderKeys.SingleMedia && loader.isLoading ? (
     <Container className={classes.movieContainer}>
@@ -71,7 +69,6 @@ const SingleMovie = () => {
           <Typography variant='body1' paragraph gutterBottom>
             {media?.overview}
           </Typography>
-          {/* <CastSlider casts={casts} /> */}
           <div className={classes.actionButton}>
             {media?.homepage && (
               <Button

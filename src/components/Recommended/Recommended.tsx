@@ -1,27 +1,29 @@
 import { Container, Grid, Typography } from "@material-ui/core";
 import { LoaderKeys } from "../../reducers/loader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Movie from "../Movies/Movie/Movie";
 import Loading from "../../Loading";
 import useStyle from "./styles";
 import { useEffect } from "react";
 import { fetchRecommended } from "../../actions/recommended";
+import { ReduxStore } from "../../reducers/rootReducer";
 
 const Recommended = () => {
   const dispatch = useDispatch();
   const { id, media_type } = useParams();
-  const loader = useTypedSelector((state) => state.loader);
-  const recommendedMedias = useTypedSelector((state) => state.recommended.list);
   const classes = useStyle();
+  const loader = useSelector((state: ReduxStore) => state.loader);
+  const recommendedMedias = useSelector(
+    (state: ReduxStore) => state.recommended.list
+  );
 
   useEffect(() => {
     dispatch(fetchRecommended(media_type, id));
   }, [id]);
 
   return loader.key === LoaderKeys.RecommendedMedia && loader.isLoading ? (
-    <Container maxWidth='md'>
+    <Container className={classes.moviesContainer}>
       <Loading />
     </Container>
   ) : (

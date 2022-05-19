@@ -9,17 +9,14 @@ import {
   Tabs,
   ThemeProvider,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../utilities/useTypeSelector";
+import { useDispatch, useSelector } from "react-redux";
 import { Search } from "@material-ui/icons";
 import Loading from "../../Loading";
 import { fetchSearchMedia } from "../../actions/search";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
-
-enum LoaderKeys {
-  search = "search",
-}
+import { ReduxStore } from "../../reducers/rootReducer";
+import { LoaderKeys } from "../../reducers/loader";
 
 const SearchMovie = () => {
   const dispatch = useDispatch();
@@ -27,11 +24,10 @@ const SearchMovie = () => {
   const [type, setType] = useState(0);
   const [query, setQuery] = useState("");
   const [showError, setShowError] = useState(false);
-
-  const {
-    loader: { isLoading, key },
-    search: { media_list },
-  } = useTypedSelector((state) => state);
+  const loader = useSelector((state: ReduxStore) => state.loader);
+  const media_list = useSelector(
+    (state: ReduxStore) => state.search.media_list
+  );
 
   const darkTheme = createTheme({
     palette: {
@@ -56,8 +52,8 @@ const SearchMovie = () => {
     setShowError(false);
   };
 
-  return key === LoaderKeys.search && isLoading ? (
-    <Container maxWidth='md'>
+  return loader.key === LoaderKeys.Search && loader.isLoading ? (
+    <Container className={classes.moviesContainer}>
       <Loading />
     </Container>
   ) : (

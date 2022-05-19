@@ -8,5 +8,6 @@ export default makeStyles((theme) => ({
     backgroundColor: "#39445A",
     padding: "3% 3% 10% 3%",
     minHeight: "100vh",
+    minWidth: "100vw",
   },
 }));

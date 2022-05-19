@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import useStyles from "./styles";
-import { Video } from "../../actionTypes";
+import { Video } from "../../MediaTypes";
 
 type videos = {
   videos: Video | undefined;

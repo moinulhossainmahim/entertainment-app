@@ -1,19 +1,28 @@
-import { Action, ActionType, MovieType } from "../actionTypes";
+import { MovieType } from "../MediaTypes";
 
-type State = {
+export enum RecommendedActions {
+  Recommended = "RECOMMENDED",
+}
+
+export interface RecommendedStore {
   list: MovieType[];
-};
+}
 
-const initialState = {
+export interface RecommendedAction {
+  type: RecommendedActions.Recommended;
+  payload: RecommendedStore;
+}
+
+const initialState: RecommendedStore = {
   list: [],
 };
 
 const recommendedMediaReducer = (
-  state: State = initialState,
-  action: Action
+  state = initialState,
+  action: RecommendedAction
 ) => {
   switch (action.type) {
-    case ActionType.FETCH_RECOMMENDED:
+    case RecommendedActions.Recommended:
       return { ...state, list: action.payload };
     default:
       return state;

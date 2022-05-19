@@ -1,7 +1,7 @@
 import { Badge, Card, CardContent, Typography, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
-import { MovieType } from "../../../actionTypes";
+import { MovieType } from "../../../MediaTypes";
 import { image } from "../../../images/image";
 
 type movie = {

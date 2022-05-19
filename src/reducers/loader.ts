@@ -1,4 +1,6 @@
-import { ActionType, Action, LoaderType } from "../actionTypes";
+export enum LoaderActions {
+  Loader = "LOADER",
+}
 
 export enum LoaderKeys {
   Trending = "trending",
@@ -11,16 +13,24 @@ export enum LoaderKeys {
   GenreMedias = "genreMedias",
 }
 
-type State = LoaderType;
+export interface LoaderStore {
+  isLoading: true | false;
+  key: string;
+}
 
-const initialState = {
-  isLoading: true,
+export interface LoaderAction {
+  type: LoaderActions.Loader;
+  payload: LoaderStore;
+}
+
+const initialState: LoaderStore = {
+  isLoading: false,
   key: "",
 };
 
-const loaderReducer = (state: State = initialState, action: Action) => {
+const loaderReducer = (state = initialState, action: LoaderAction) => {
   switch (action.type) {
-    case ActionType.LOADER:
+    case LoaderActions.Loader:
       return {
         ...state,
         key: action.payload.key,

@@ -1,18 +1,27 @@
-import { Action, ActionType, MovieType } from "./../actionTypes";
+import { MovieType } from "../MediaTypes";
 
-interface State {
+export enum GenresActions {
+  Genres = "GENRES",
+}
+
+export interface GenresStore {
   list: MovieType[];
   error: string | null;
 }
 
-const intialState = {
+export interface GenresAction {
+  type: GenresActions.Genres;
+  payload: GenresStore;
+}
+
+const intialState: GenresStore = {
   list: [],
   error: null,
 };
 
-const genreMediasReducer = (state: State = intialState, action: Action) => {
+const genreMediasReducer = (state = intialState, action: GenresAction) => {
   switch (action.type) {
-    case ActionType.FETCH_MEDIA_BY_GENRE:
+    case GenresActions.Genres:
       return { ...state, list: action.payload };
     default:
       return state;

@@ -1,18 +1,18 @@
 import { Container, Grid, Typography } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
-import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Movie from "./Movie/Movie";
 import Loading from "../../Loading";
 import { useEffect } from "react";
 import { fetchMedia } from "../../actions/media";
 import { LoaderKeys } from "../../reducers/loader";
+import { ReduxStore } from "../../reducers/rootReducer";
 
 const Movies = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const loader = useTypedSelector((state) => state.loader);
-  const movies = useTypedSelector((state) => state.movies.list);
+  const loader = useSelector((state: ReduxStore) => state.loader);
+  const movies = useSelector((state: ReduxStore) => state.movies.list);
 
   useEffect(() => {
     if (!movies.length) {
@@ -21,7 +21,7 @@ const Movies = () => {
   }, []);
 
   return loader.key === LoaderKeys.Movies && loader.isLoading ? (
-    <Container maxWidth='md'>
+    <Container className={classes.moviesContainer}>
       <Loading />
     </Container>
   ) : (

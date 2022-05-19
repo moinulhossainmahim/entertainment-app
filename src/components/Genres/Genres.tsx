@@ -1,14 +1,4 @@
 import React, { useEffect, useState } from "react";
-/* import {
-  Container,
-  Grid,
-  Typography,
-  FormControl,
-  MenuItem,
-  Select,
-  InputLabel,
-} from "@material-ui/core";
-import { Theme, useTheme } from "@material-ui/core"; */
 import {
   Container,
   Grid,
@@ -18,33 +8,34 @@ import {
   Select,
   InputLabel,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../utilities/useTypeSelector";
+import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
 import Loading from "../../Loading";
-import { fetchMediaByGenres, fetchTrending } from "../../actions/media";
+import { fetchMediaByGenres } from "../../actions/media";
 import { LoaderKeys } from "../../reducers/loader";
 import { useParams } from "react-router-dom";
+import { ReduxStore } from "../../reducers/rootReducer";
 
 const Genres = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const [sort, setSort] = useState("");
   const { media_type, genreId, name } = useParams();
-  const trendingMovies = useTypedSelector((state) => state.trending.list);
-  const genreMedias = useTypedSelector((state) => state.genreMedias.list);
-  const loader = useTypedSelector((state) => state.loader);
-  const classes = useStyles();
+  const loader = useSelector((state: ReduxStore) => state.loader);
+  const genreMedias = useSelector(
+    (state: ReduxStore) => state.genreMedias.list
+  );
 
   const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
     setSort(event.target.value);
   };
 
   useEffect(() => {
-    console.log("fetchMediaGenre called");
     dispatch(fetchMediaByGenres(media_type, genreId, sort));
   }, [sort]);
-  return loader.key === LoaderKeys.Trending && loader.isLoading ? (
+
+  return loader.key === LoaderKeys.GenreMedias && loader.isLoading ? (
     <Container maxWidth='md' className={classes.moviesContainer}>
       <Loading />
     </Container>

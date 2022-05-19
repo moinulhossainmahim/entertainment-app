@@ -2,20 +2,17 @@ import { useEffect } from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
-import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../utilities/useTypeSelector";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../Loading";
+import { LoaderKeys } from "../../reducers/loader";
 import { fetchMedia } from "../../actions/media";
-
-enum LoaderKeys {
-  tvseries = "tvseries",
-}
+import { ReduxStore } from "../../reducers/rootReducer";
 
 const TvSeries = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const loader = useTypedSelector((state) => state.loader);
-  const tvSeries = useTypedSelector((state) => state.tvSeries.list);
+  const loader = useSelector((state: ReduxStore) => state.loader);
+  const tvSeries = useSelector((state: ReduxStore) => state.tvSeries.list);
 
   useEffect(() => {
     if (!tvSeries.length) {
@@ -23,8 +20,8 @@ const TvSeries = () => {
     }
   }, []);
 
-  return loader.key === LoaderKeys.tvseries && loader.isLoading ? (
-    <Container maxWidth='md' className={classes.moviesContainer}>
+  return loader.key === LoaderKeys.TvSeries && loader.isLoading ? (
+    <Container className={classes.moviesContainer}>
       <Loading />
     </Container>
   ) : (
