@@ -16,7 +16,7 @@ export const fetchMedia =
       const {
         data: { results: media },
       } = await axios.get(
-        `https://api.themoviedb.org/3/discover/${mediaType}?api_key=f41ca7cfda77d7a7d04c7c1e517633b9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false`
+        `https://api.themoviedb.org/3/discover/${mediaType}?api_key=f41ca7cfda77d7a7d04c7c1e517633b9&include_adult=false&include_video=false`
       );
       dispatch({
         type:
@@ -78,3 +78,33 @@ export const fetchTrending = () => async (dispatch: Dispatch<Action>) => {
     dispatch({ type: ActionType.ERROR, payload: error.message });
   }
 };
+
+export const fetchMediaByGenres =
+  (
+    media_type: string | undefined,
+    id: string | undefined,
+    sort: string | undefined
+  ) =>
+  async (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.LOADER,
+      payload: { isLoading: true, key: LoaderKeys.GenreMedias },
+    });
+    try {
+      const {
+        data: { results: mediasByGenre },
+      } = await axios.get(
+        `https://api.themoviedb.org/3/discover/${media_type}?api_key=f41ca7cfda77d7a7d04c7c1e517633b9&with_genres=${id}&sort_by=${sort}`
+      );
+      dispatch({
+        type: ActionType.FETCH_MEDIA_BY_GENRE,
+        payload: mediasByGenre,
+      });
+      dispatch({
+        type: ActionType.LOADER,
+        payload: { isLoading: false, key: LoaderKeys.GenreMedias },
+      });
+    } catch (error: any) {
+      dispatch({ type: ActionType.ERROR, payload: error.message });
+    }
+  };

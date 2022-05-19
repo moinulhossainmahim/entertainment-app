@@ -7,8 +7,10 @@ import searchReducer from "./search";
 import singleMediaReducer from "./singleMedia";
 import trendingReducer from "./trending";
 import tvSeriesReducer from "./tvSeries";
+import genreMediasReducer from "./genreMedias";
 
 const rootReducer = combineReducers({
+  genreMedias: genreMediasReducer,
   recommended: recommendedMediaReducer,
   singleMedia: singleMediaReducer,
   tvSeries: tvSeriesReducer,

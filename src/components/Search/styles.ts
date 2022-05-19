@@ -3,8 +3,11 @@ import { makeStyles } from "@material-ui/styles";
 export default makeStyles((theme) => ({
   searchBox: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     margin: "15px 0",
+    alignItems: "center",
+    position: "relative",
   },
   card: {
     height: "100%",
@@ -23,7 +26,7 @@ export default makeStyles((theme) => ({
   },
   moviesContainer: {
     backgroundColor: "#39445A",
-    padding: "5%",
+    padding: "7% 5%",
     minHeight: "calc(100vh - 11rem)",
   },
   movieInfo: {
@@ -31,10 +34,17 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   form: {
-    width: "60vh",
+    width: "60vw",
     display: "flex",
   },
   searchWrapper: {
     padding: "0 0 5rem 0",
+  },
+  warningMsg: {
+    color: "#c62121",
+    position: "absolute",
+    top: "-112%",
+    left: "17%",
+    fontSize: "1.2rem",
   },
 }));

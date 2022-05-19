@@ -19,6 +19,7 @@ export default makeStyles((theme) => ({
   },
   movieTitle: {
     textTransform: "capitalize",
+    fontSize: "1.2rem",
   },
   mediaType: {
     textTransform: "capitalize",
@@ -32,5 +33,9 @@ export default makeStyles((theme) => ({
     "&:hover": {
       transform: "scale(1.04)",
     },
+  },
+  ratingBadge: {
+    top: "4px",
+    right: "-7px",
   },
 }));

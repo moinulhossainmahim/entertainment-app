@@ -54,51 +54,51 @@ type Casts = {
   );
 } */
 
-export default function CastSlider({ casts }: Casts) {
-  const [totalShow, setTotalShow] = useState(5);
-  const sliderElement = useRef<HTMLDivElement>(null!);
+// export default function CastSlider({ casts }: Casts) {
+//   const [totalShow, setTotalShow] = useState(5);
+//   const sliderElement = useRef<HTMLDivElement>(null!);
 
-  const filterCasts = casts.filter((cast) => cast.profile_path);
-  const classes = useStyles();
+//   const filterCasts = casts.filter((cast) => cast.profile_path);
+//   const classes = useStyles();
 
-  const changeTotalShow = () => {
-    let totalItems = Math.round(sliderElement.current.offsetWidth / 70);
-    if (totalItems > casts.length) {
-      totalItems = casts.length;
-    }
-    setTotalShow(totalItems);
-  };
+//   const changeTotalShow = () => {
+//     let totalItems = Math.round(sliderElement.current.offsetWidth / 70);
+//     if (totalItems > casts.length) {
+//       totalItems = casts.length;
+//     }
+//     setTotalShow(totalItems);
+//   };
 
-  useEffect(() => {
-    changeTotalShow();
-    window.addEventListener("resize", changeTotalShow);
-    return () => window.addEventListener("resize", changeTotalShow);
-  }, []);
+//   useEffect(() => {
+//     changeTotalShow();
+//     window.addEventListener("resize", changeTotalShow);
+//     return () => window.addEventListener("resize", changeTotalShow);
+//   }, []);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    swipeToSlide: true,
-    speed: 500,
-    slidesToShow: totalShow,
-    slidesToScroll: 1,
-  };
-  return (
-    <div ref={sliderElement}>
-      <Slider {...settings}>
-        {filterCasts.map((cast) => {
-          return (
-            <div key={cast.id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
-                className={classes.carouselImg}
-              />
-            </div>
-          );
-        })}
-      </Slider>
-    </div>
-  );
-}
+//   const settings = {
+//     dots: false,
+//     infinite: true,
+//     autoplay: true,
+//     autoplaySpeed: 3000,
+//     swipeToSlide: true,
+//     speed: 500,
+//     slidesToShow: totalShow,
+//     slidesToScroll: 1,
+//   };
+//   return (
+//     <div ref={sliderElement}>
+//       <Slider {...settings}>
+//         {filterCasts.map((cast) => {
+//           return (
+//             <div key={cast.id}>
+//               <img
+//                 src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
+//                 className={classes.carouselImg}
+//               />
+//             </div>
+//           );
+//         })}
+//       </Slider>
+//     </div>
+//   );
+// }

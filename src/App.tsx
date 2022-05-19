@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer";
 import { Navbar } from "./components/Navbar/Navbar";
 import {
   SinglePage,
@@ -8,6 +8,7 @@ import {
   Home,
   TvSeriesPage,
   SearchPage,
+  GenresPage,
 } from "./components/Pages";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 
@@ -30,11 +31,16 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/movies' element={<MoviesPage />} />
-          <Route path='/tvseries' element={<TvSeriesPage />} />
           <Route path='/:media_type/:id' element={<SinglePage />} />
           <Route path='/search' element={<SearchPage />} />
+          <Route
+            path='/genres/:media_type/:name/:genreId'
+            element={<GenresPage />}
+          />
+          <Route path='/tvseries' element={<TvSeriesPage />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );

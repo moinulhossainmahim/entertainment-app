@@ -52,6 +52,7 @@ export enum ActionType {
   SEARCH_MEDIA = "SEARCH_MEDIA",
   FETCH_RECOMMENDED = "FETCH_RECOMMENDED",
   FETCH_CASTS = "FETCH_CASTS",
+  FETCH_MEDIA_BY_GENRE = "FETCH_MEDIA_BY_GENRE",
 }
 
 interface loading {
@@ -65,7 +66,8 @@ interface fetchMovies {
     | ActionType.FETCH_TRENDING
     | ActionType.FETCH_TVSERIES
     | ActionType.SEARCH_MEDIA
-    | ActionType.FETCH_RECOMMENDED;
+    | ActionType.FETCH_RECOMMENDED
+    | ActionType.FETCH_MEDIA_BY_GENRE;
   payload: MovieType[];
 }
 

@@ -6,13 +6,11 @@ export default function HomeSlider() {
   const classes = useStyles();
   const settings = {
     dots: true,
-    fade: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    cssEase: "linear",
   };
   return (
     <div className={classes.sliderContainer}>
@@ -23,7 +21,7 @@ export default function HomeSlider() {
               <img
                 src={image.src}
                 alt='slider-image'
-                style={{ width: "100%", height: "60vh", objectFit: "fill" }}
+                style={{ width: "100%", height: "70vh", objectFit: "fill" }}
               />
             </div>
           );

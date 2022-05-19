@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import { Container, Grid, Typography, Chip, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../utilities/useTypeSelector";
 import Loading from "../../Loading";
 import { fetchSingleMedia } from "../../actions/media";
-import { fetchCasts } from "../../actions/casts";
 import { image } from "../../images/image";
 import { LoaderKeys } from "../../reducers/loader";
-import CastSlider from "../cast-slider/CastSlider";
 import TrailerModal from "../TrailerModal/TrailerModal";
 
 const SingleMovie = () => {
@@ -18,13 +17,12 @@ const SingleMovie = () => {
   const { id, media_type } = useParams();
   const loader = useTypedSelector((state) => state.loader);
   const media = useTypedSelector((state) => state.singleMedia.media);
+  const casts = useTypedSelector((state) => state.casts.casts);
 
   useEffect(() => {
     dispatch(fetchSingleMedia(media_type, id));
-    dispatch(fetchCasts(media_type, id));
+    // dispatch(fetchCasts(media_type, id));
   }, [media_type, id]);
-
-  const handleClick = () => {};
 
   return loader.key === LoaderKeys.SingleMedia && loader.isLoading ? (
     <Container className={classes.movieContainer}>
@@ -57,12 +55,13 @@ const SingleMovie = () => {
           <div className={classes.genre}>
             {media?.genres.map((genre) => {
               return (
-                <Chip
-                  label={genre.name}
-                  onClick={handleClick}
+                <Link
+                  to={`/genres/${media_type}/${genre.name}/${genre.id}`}
                   key={genre.id}
-                  className={classes.chip}
-                />
+                  style={{ textDecoration: "none" }}
+                >
+                  <Chip label={genre.name} className={classes.chip} />
+                </Link>
               );
             })}
           </div>
@@ -72,6 +71,7 @@ const SingleMovie = () => {
           <Typography variant='body1' paragraph gutterBottom>
             {media?.overview}
           </Typography>
+          {/* <CastSlider casts={casts} /> */}
           <div className={classes.actionButton}>
             {media?.homepage && (
               <Button

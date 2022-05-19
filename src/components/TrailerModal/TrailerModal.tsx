@@ -78,8 +78,8 @@ export default function TrailerModal({ videos }: videos) {
         />
         <DialogContent>
           <iframe
-            width='850'
-            height='400'
+            width='100%'
+            height='100%'
             src={`https://www.youtube.com/embed/${video?.key}`}
             title='YouTube video player'
             frameBorder='0'

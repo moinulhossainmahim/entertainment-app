@@ -5,6 +5,7 @@ export default makeStyles((theme) => ({
     padding: "5% 10%",
     backgroundColor: "#39445A",
     color: "#c6c6c6",
+    minHeight: "100vh",
   },
   movieImage: {
     maxWidth: "100%",
@@ -21,6 +22,7 @@ export default makeStyles((theme) => ({
   },
   chip: {
     marginRight: ".5rem",
+    cursor: "pointer",
   },
   actionButton: {
     display: "flex",

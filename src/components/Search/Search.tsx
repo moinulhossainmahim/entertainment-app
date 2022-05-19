@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import {
   Container,
   Grid,
-  Box,
   Button,
   TextField,
-  Badge,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
   createTheme,
   Tab,
   Tabs,
@@ -32,6 +26,8 @@ const SearchMovie = () => {
   const classes = useStyles();
   const [type, setType] = useState(0);
   const [query, setQuery] = useState("");
+  const [showError, setShowError] = useState(false);
+
   const {
     loader: { isLoading, key },
     search: { media_list },
@@ -52,8 +48,12 @@ const SearchMovie = () => {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!query) {
+      return setShowError(true);
+    }
     const media_type = typeOfMedia(type);
     dispatch(fetchSearchMedia(media_type, query));
+    setShowError(false);
   };
 
   return key === LoaderKeys.search && isLoading ? (
@@ -65,6 +65,9 @@ const SearchMovie = () => {
       <div className={classes.searchWrapper}>
         <ThemeProvider theme={darkTheme}>
           <div className={classes.searchBox}>
+            {showError && (
+              <h4 className={classes.warningMsg}>please fill in this field*</h4>
+            )}
             <form className={classes.form} onSubmit={handleSubmit}>
               <TextField
                 variant='outlined'

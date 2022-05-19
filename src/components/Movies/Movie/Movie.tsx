@@ -1,11 +1,4 @@
-import {
-  Badge,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  Box,
-} from "@material-ui/core";
+import { Badge, Card, CardContent, Typography, Box } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 import { MovieType } from "../../../actionTypes";
@@ -18,14 +11,17 @@ type movie = {
 
 const Movie = ({ movie, media_type }: movie) => {
   const classes = useStyles();
-
   return (
     <div className={classes.movieDiv}>
       <Link
         to={`/${media_type}/${movie.id}`}
         className={classes.singleMovieLink}
       >
-        <Badge badgeContent={movie.vote_average} color='primary' />
+        <Badge
+          badgeContent={movie.vote_average.toFixed(1)}
+          color='primary'
+          className={classes.ratingBadge}
+        />
         <Card className={classes.card}>
           <img
             src={

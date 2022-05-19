@@ -8,6 +8,7 @@ export enum LoaderKeys {
   Search = "search",
   RecommendedMedia = "recommendedMedia",
   Casts = "casts",
+  GenreMedias = "genreMedias",
 }
 
 type State = LoaderType;
