@@ -6,7 +6,6 @@ export enum GenresActions {
 
 export interface GenresStore {
   list: MovieType[];
-  error: string | null;
 }
 
 export interface GenresAction {
@@ -16,7 +15,6 @@ export interface GenresAction {
 
 const intialState: GenresStore = {
   list: [],
-  error: null,
 };
 
 const genreMediasReducer = (state = intialState, action: GenresAction) => {

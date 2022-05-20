@@ -7,8 +7,10 @@ import singleMediaReducer, { SingleMediaStore } from "./singleMedia";
 import trendingReducer, { TrendingStore } from "./trending";
 import tvSeriesReducer, { TvSeriesStore } from "./tvSeries";
 import genreMediasReducer, { GenresStore } from "./genreMedias";
+import errorReducer, { ErrorStore } from "./error";
 
 export interface ReduxStore {
+  error: ErrorStore;
   loader: LoaderStore;
   singleMedia: SingleMediaStore;
   search: SearchStore;
@@ -28,8 +30,7 @@ const rootReducer = combineReducers({
   movies: movieReducer,
   search: searchReducer,
   loader: loaderReducer,
+  error: errorReducer,
 });
 
 export default rootReducer;
-
-export type RootState = ReturnType<typeof rootReducer>;

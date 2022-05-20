@@ -6,7 +6,6 @@ export enum TvSeriesActions {
 
 export interface TvSeriesStore {
   list: MovieType[];
-  error: string | null;
 }
 export interface TvSeriesAction {
   type: TvSeriesActions.TvSeries;
@@ -15,7 +14,6 @@ export interface TvSeriesAction {
 
 const initialState: TvSeriesStore = {
   list: [],
-  error: null,
 };
 
 const tvSeriesReducer = (state = initialState, action: TvSeriesAction) => {

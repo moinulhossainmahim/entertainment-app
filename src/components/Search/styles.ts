@@ -49,4 +49,7 @@ export default makeStyles((theme) => ({
     fontSize: "1.2rem",
     letterSpacing: "2px",
   },
+  noMovieText: {
+    color: "#dbd9db",
+  },
 }));

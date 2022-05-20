@@ -6,7 +6,6 @@ export enum TrendingActions {
 
 export interface TrendingStore {
   list: MovieType[];
-  error: string | null;
 }
 
 export interface TrendingAction {
@@ -16,7 +15,6 @@ export interface TrendingAction {
 
 const initialState: TrendingStore = {
   list: [],
-  error: null,
 };
 
 const trendingReducer = (state = initialState, action: TrendingAction) => {

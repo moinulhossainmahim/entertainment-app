@@ -6,7 +6,6 @@ export enum MoviesActions {
 
 export interface MoviesStore {
   list: MovieType[];
-  error: string | null;
 }
 
 export interface MoviesAction {
@@ -16,7 +15,6 @@ export interface MoviesAction {
 
 const initialState: MoviesStore = {
   list: [],
-  error: null,
 };
 
 const movieReducer = (state = initialState, action: MoviesAction) => {

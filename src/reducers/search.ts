@@ -6,7 +6,6 @@ export enum SearchActions {
 
 export interface SearchStore {
   media_list: MovieType[];
-  error: string | null;
 }
 
 export interface SearchAction {
@@ -16,7 +15,6 @@ export interface SearchAction {
 
 const initialState: SearchStore = {
   media_list: [],
-  error: null,
 };
 
 const searchReducer = (state = initialState, action: SearchAction) => {

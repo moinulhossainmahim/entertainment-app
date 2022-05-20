@@ -6,7 +6,6 @@ export enum SingleMediaActions {
 
 export interface SingleMediaStore {
   media: MovieType | null;
-  error: string | null;
 }
 
 export interface SingleMediaAction {
@@ -16,7 +15,6 @@ export interface SingleMediaAction {
 
 const initialState: SingleMediaStore = {
   media: null,
-  error: null,
 };
 
 const singleMediaReducer = (

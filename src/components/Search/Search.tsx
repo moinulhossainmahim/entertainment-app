@@ -8,15 +8,17 @@ import {
   Tab,
   Tabs,
   ThemeProvider,
+  Typography,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { Search } from "@material-ui/icons";
+import { Search, StarsTwoTone } from "@material-ui/icons";
 import Loading from "../../Loading";
 import { fetchSearchMedia } from "../../actions/search";
 import useStyles from "./styles";
 import Movie from "../Movies/Movie/Movie";
 import { ReduxStore } from "../../reducers/rootReducer";
 import { LoaderKeys } from "../../reducers/loader";
+import { ErrorActions } from "../../reducers/error";
 
 const SearchMovie = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,8 @@ const SearchMovie = () => {
   const [query, setQuery] = useState("");
   const [showError, setShowError] = useState(false);
   const loader = useSelector((state: ReduxStore) => state.loader);
+  const error = useSelector((state: ReduxStore) => state.error);
+  console.log(error);
   const media_list = useSelector(
     (state: ReduxStore) => state.search.media_list
   );
@@ -127,19 +131,31 @@ const SearchMovie = () => {
         </ThemeProvider>
       </div>
       <Grid container justifyContent='center' spacing={4}>
-        {media_list.map((media) => (
-          <Grid
-            key={media.id}
-            item
-            xs={12}
-            md={4}
-            lg={3}
-            sm={6}
-            className={classes.mainCard}
+        {error.key === ErrorActions.Error && error.isError === true ? (
+          <Typography
+            variant='h6'
+            align='center'
+            className={classes.noMovieText}
           >
-            <Movie movie={media} media_type={typeOfMedia(type)} />
-          </Grid>
-        ))}
+            {error.errorMessage}
+          </Typography>
+        ) : (
+          <>
+            {media_list.map((media) => (
+              <Grid
+                key={media.id}
+                item
+                xs={12}
+                md={4}
+                lg={3}
+                sm={6}
+                className={classes.mainCard}
+              >
+                <Movie movie={media} media_type={typeOfMedia(type)} />
+              </Grid>
+            ))}
+          </>
+        )}
       </Grid>
     </Container>
   );
