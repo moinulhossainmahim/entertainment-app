@@ -54,6 +54,40 @@ const SearchMovie = () => {
 
   return loader.key === LoaderKeys.Search && loader.isLoading ? (
     <Container className={classes.moviesContainer}>
+      <div className={classes.searchWrapper}>
+        <ThemeProvider theme={darkTheme}>
+          <div className={classes.searchBox}>
+            {showError && (
+              <h4 className={classes.warningMsg}>please fill in this field*</h4>
+            )}
+            <form className={classes.form} onSubmit={handleSubmit}>
+              <TextField
+                variant='outlined'
+                label='Search'
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                fullWidth
+              />
+              <Button variant='contained' type='submit'>
+                <Search fontSize='large' />
+              </Button>
+            </form>
+          </div>
+          <Tabs
+            value={type}
+            indicatorColor='primary'
+            textColor='primary'
+            onChange={(event, newValue) => {
+              setType(newValue);
+            }}
+            style={{ paddingBottom: 5 }}
+            aria-label='disabled tabs example'
+          >
+            <Tab style={{ width: "50%" }} label='Search Movies' />
+            <Tab style={{ width: "50%" }} label='Search TV Series' />
+          </Tabs>
+        </ThemeProvider>
+      </div>
       <Loading />
     </Container>
   ) : (
