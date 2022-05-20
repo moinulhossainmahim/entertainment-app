@@ -37,6 +37,36 @@ const Genres = () => {
 
   return loader.key === LoaderKeys.GenreMedias && loader.isLoading ? (
     <Container maxWidth='md' className={classes.moviesContainer}>
+      <Typography
+        align='center'
+        variant='h4'
+        gutterBottom
+        style={{ color: "white", textTransform: "uppercase" }}
+      >
+        {name?.toUpperCase()} {media_type === "tv" ? "Tv Series" : "Movies"}
+      </Typography>
+      <FormControl className={classes.selectForm}>
+        <InputLabel
+          id='demo-simple-select-label'
+          style={{ color: "white", top: "-20%" }}
+        >
+          Sort By
+        </InputLabel>
+        <Select
+          labelId='demo-select-small'
+          id='demo-select-small'
+          value={sort}
+          label='Sort By'
+          onChange={handleChange}
+          autoWidth={true}
+          style={{ color: "white", border: "1px solid white" }}
+        >
+          <MenuItem value='popularity.desc'>Popularity</MenuItem>
+          <MenuItem value='vote_average.desc'>Votes Average</MenuItem>
+          <MenuItem value='original_title.asc'>Title</MenuItem>
+          <MenuItem value='release_date.desc'>Release Date</MenuItem>
+        </Select>
+      </FormControl>
       <Loading />
     </Container>
   ) : (
